@@ -1,0 +1,73 @@
+name: Attach Release Website ZIP
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing release tag to build and attach, for example v0.1.0
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-website-${{ github.event.release.tag_name || inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  attach-website:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pages: read
+    env:
+      RELEASE_TAG: ${{ github.event.release.tag_name || inputs.tag }}
+      REPOSITORY_NAME: ${{ github.event.repository.name }}
+    steps:
+      - name: Verify the release already exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          case "$RELEASE_TAG" in
+            ''|-*) echo 'Provide an existing release tag.' >&2; exit 1 ;;
+          esac
+          gh release view "$RELEASE_TAG" --json tagName --jq .tagName
+      - name: Check out the published tag
+        uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ env.RELEASE_TAG }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Read Pages configuration
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Build the tagged website for Pages
+        env:
+          VITE_GITHUB_PAGES: 'true'
+          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+        run: |
+          npm run build -- --base="$PAGES_BASE_PATH"
+          touch dist/.nojekyll
+      - name: Package the website
+        id: archive
+        run: |
+          safe_tag="${RELEASE_TAG//[^A-Za-z0-9._-]/-}"
+          archive_path="$RUNNER_TEMP/${REPOSITORY_NAME}-${safe_tag}-pages.zip"
+          (cd dist && zip -q -r "$archive_path" .)
+          printf 'path=%s\n' "$archive_path" >> "$GITHUB_OUTPUT"
+      - name: Attach ZIP to the existing release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_ARCHIVE: ${{ steps.archive.outputs.path }}
+        run: gh release upload "$RELEASE_TAG" "$RELEASE_ARCHIVE"
