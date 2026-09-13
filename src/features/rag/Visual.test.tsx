@@ -1,5 +1,6 @@
 import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
+import { MemoryRouter } from 'react-router-dom'
 import ChapterVisual from './Visual'
 afterEach(cleanup)
 describe('RAG learning interaction', () => {
@@ -26,7 +27,11 @@ describe('RAG learning interaction', () => {
   })
   it('requires comparing meaning-based retrieval before completion', () => {
     const onComplete = vi.fn()
-    render(<ChapterVisual step={2} onComplete={onComplete} completed={false} />)
+    render(
+      <MemoryRouter>
+        <ChapterVisual step={2} onComplete={onComplete} completed={false} />
+      </MemoryRouter>,
+    )
     expect(screen.getByRole('button', { name: '先切换到语义检索观察结果' })).toBeDisabled()
     fireEvent.click(screen.getByRole('button', { name: '语义：寻找相近含义' }))
     expect(screen.getByText('找回了不同措辞')).toBeVisible()

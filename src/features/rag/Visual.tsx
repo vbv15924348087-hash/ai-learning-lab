@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import type { ChapterVisualProps } from '../curriculum/types'
 import { candidates } from './data'
 import './rag.css'
@@ -183,9 +184,9 @@ function SemanticCompare({ onComplete }: Pick<ChapterVisualProps, 'onComplete'>)
         这是最简单的字面匹配对比。实际关键词搜索可以扩展同义词，也可以与向量检索组合。
       </p>
       <p>
-        <a className="rg-review-link" href="/lesson/model-inside">
+        <Link className="rg-review-link" to="/lesson/model-inside">
           回到 Model Inside，复习 Embedding →
-        </a>
+        </Link>
       </p>
       <button className="cr-action" disabled={!seenSemantic} onClick={onComplete}>
         {seenSemantic ? '我看到了“按含义找”的价值 →' : '先切换到语义检索观察结果'}

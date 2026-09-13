@@ -27,9 +27,28 @@ npm run test
 npm run preview
 ```
 
-构建目录为 `dist/`。`npm run preview` 默认使用 [本地构建预览](http://127.0.0.1:4173)，Windows 启动器使用 **4174 /learn**。启动器端口被其他服务占用时，可运行 `powershell -ExecutionPolicy Bypass -File .\start-local.ps1 -Port 4175`。路由采用 BrowserRouter，托管时需要将未知文件路径回退到 `index.html`。当前没有部署。
+构建目录为 `dist/`。`npm run preview` 默认使用 [本地构建预览](http://127.0.0.1:4173)，Windows 启动器使用 **4174 /learn**。启动器端口被其他服务占用时，可运行 `powershell -ExecutionPolicy Bypass -File .\start-local.ps1 -Port 4175`。普通构建采用 BrowserRouter，托管时需要将未知文件路径回退到 `index.html`；GitHub Pages 构建使用下文的 HashRouter 配置。
 
 Windows 开发模式使用文件轮询并忽略文档、工作记录和覆盖率目录，避免文件被编辑器或扫描程序短暂占用时中断服务。`npm run format` 可统一整理源码格式。
+
+## GitHub Pages 发布与下载
+
+GitHub 仓库：[ai-learning-lab](https://github.com/vbv15924348087-hash/ai-learning-lab)。部署成功后的访问地址为 [Inside AI 网站](https://vbv15924348087-hash.github.io/ai-learning-lab/)，系统探索直达地址为 [#/explore](https://vbv15924348087-hash.github.io/ai-learning-lab/#/explore)。
+
+仓库 Settings → Pages 的 Source 使用 **GitHub Actions**。推送到 `main` 或手动运行 **Deploy GitHub Pages** 工作流后，Actions 会安装依赖、运行 Lint / Test、构建并发布。Vite 的资源前缀读取 Pages 实际 `base_path`，适配项目仓库子目录；工作流设置 `VITE_GITHUB_PAGES=true`，只在 Pages 构建中启用 HashRouter，因此刷新 `#/explore` 或 `#/lesson/context` 不需要服务器路由回退。课程中的页内跳转仍会滚动并聚焦目标，且不会覆盖路由片段。
+
+固定版本下载见 [v0.1.0 GitHub Release](https://github.com/vbv15924348087-hash/ai-learning-lab/releases/tag/v0.1.0)，附件为 **ai-learning-lab-v0.1.0-pages.zip**。在成功运行的 Actions 页面中，Artifacts 下的 **website-dist** 也可下载为 ZIP，包含该次部署的完整静态网站文件，保存 14 天。网站包含所有课程与 Simulator，所有外部工具行为仍为教学模拟。
+
+如需在本机生成同样的 Pages 包：
+
+```powershell
+$env:VITE_GITHUB_PAGES = 'true'
+npm run build -- --base=/ai-learning-lab/
+Remove-Item Env:VITE_GITHUB_PAGES
+npm run preview -- --base=/ai-learning-lab/
+```
+
+通过 [本地 Pages 构建预览](http://127.0.0.1:4173/ai-learning-lab/#/explore) 检查。重新运行普通 `npm run build` 即恢复本地 BrowserRouter 构建。ZIP 中资源以 `/ai-learning-lab/` 为部署前缀，应通过相同子目录的 HTTP 服务访问。
 
 ## 学习流程
 
@@ -68,12 +87,13 @@ Phase 6–16 共用课程外壳：先看到问题，再完成互动、解锁术�
 - **自由探索**：搜索或点选节点，聚焦模块、查看上下游；点击连线或详情中的“为什么？”了解连接理由。解释深度可切换小白、标准、专业。
 - **关系**：查看所选节点的直接上游、直接下游或全部相关概念，保留实际存在的连接。
 - **进入内部 / X-Ray**：拆开 Context、Model、Harness。内部视图聚焦一个模块；X-Ray 保留六核心背景，一次只展开一个模块的内部结构。
-- **运行任务**：沿用 17 步 GPU 研究教学模拟，包含工具结果回流、检查失败、修复和交付。支持播放、暂停、前后步、拖动时间轴、点击步骤与重播。
-- **实验**：对比关闭 RAG、关闭 Memory、跳过 Verification、断开 Tool Result → Context、移除 Human Approval 后的教学结果。每次只改一个条件，可恢复正常系统后再次运行。
+- **运行任务**：提供简单问答、最新信息查询、PDF 总结、深度研究、高风险操作和长周期 Agent 六类任务，配有 GPU 五级复杂度阶梯、逐步原因与未经过节点的解释。支持播放、暂停、前后步、拖动和重播；高风险任务必须批准后才能继续模拟执行，拒绝会停止。
+- **对比**：在同一地图上比较两个任务，筛选共同、新增和不同的路径，观察复杂任务为何增加规划、工具、循环和核验。
+- **实验**：对比关闭 RAG、Memory、Search，跳过 Verification、断开 Tool Result → Context、移除 Human Approval 后的教学结果。每次只改一个条件，可恢复正常系统后再次运行。
 
-沉浸探索使用独立的临时状态。进入时继承原页面的选中节点、展开层级、任务位置和手动视角；退出后回到原页面，实验改动不写入课程成绩或原页面 URL。`R` 回到系统全景，`← / →` 切换时间轴步骤，`Esc` 退出沉浸；搜索框展开时先用 `Esc` 关闭搜索结果。减少动态效果时使用手动步骤，页面切入后台会暂停播放。
+沉浸探索使用独立的临时状态。进入时继承原页面的选中节点、展开层级和手动视角，Simulator 的任务运行使用独立状态；退出后回到原页面，实验改动不写入课程成绩或原页面 URL。`R` 回到全景，`F` 切换浏览器全屏，`Space` 播放或暂停，`← / →` 切换步骤，`Esc` 退出沉浸；搜索框展开时先用 `Esc` 关闭搜索结果。减少动态效果时使用手动步骤，页面切入后台会暂停播放。
 
-实验均为固定教学情境，不调用真实模型、网络或数据库。关闭 RAG 不等于关闭独立网页搜索；跳过核验后到达 Final 也不代表检查通过。实现范围、教学边界和本轮验收记录见 [沉浸探索完工报告](docs/immersive-explore-completion.md)。
+实验均为固定教学情境，不调用真实模型、网络或数据库。关闭 RAG 不等于关闭独立网页搜索；跳过核验后到达 Final 也不代表检查通过。最新 Simulator 实现范围与验收见 [Simulator 独立审查](docs/immersive-simulator-review.md)，早期记录见 [沉浸探索完工报告](docs/immersive-explore-completion.md)。
 
 ## 进度与重播
 
