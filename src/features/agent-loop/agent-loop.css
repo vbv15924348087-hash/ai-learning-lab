@@ -1,0 +1,154 @@
+.al-demo,
+.al-source {
+  font-size: 16px;
+}
+.al-kicker {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: #617088;
+  font-size: 14px;
+}
+.al-kicker strong {
+  color: #2563eb;
+}
+.al-loop {
+  height: 330px;
+  position: relative;
+  max-width: 670px;
+  margin: 12px auto;
+}
+.al-orbit {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.al-orbit path {
+  fill: none;
+  stroke: #dce5f2;
+  stroke-width: 3;
+  stroke-dasharray: 7 7;
+}
+.al-orbit .al-return {
+  stroke: #7da7f4;
+  stroke-dasharray: none;
+}
+.al-orbit text {
+  text-anchor: middle;
+  fill: #71819a;
+  font: 15px sans-serif;
+}
+.al-node {
+  position: absolute;
+  min-width: 115px;
+  padding: 12px 16px;
+  border: 1px solid #dce5f2;
+  border-radius: 12px;
+  background: #fff;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  transition:
+    background 0.25s,
+    border-color 0.25s,
+    box-shadow 0.25s;
+}
+.al-node span {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #677a98;
+}
+.al-node strong {
+  font-size: 18px;
+  line-height: 1.8;
+}
+.al-observe {
+  left: 24%;
+  top: 24%;
+}
+.al-reason {
+  left: 73%;
+  top: 24%;
+}
+.al-plan {
+  left: 87%;
+  top: 55%;
+}
+.al-act {
+  left: 68%;
+  top: 79%;
+}
+.al-verify {
+  left: 25%;
+  top: 79%;
+}
+.al-node.al-active {
+  background: #edf4ff;
+  border-color: #4b85ed;
+  box-shadow: 0 0 0 5px #d9e7ff;
+}
+.al-active span {
+  color: #2563eb;
+}
+.al-controls,
+.al-extras {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+.al-observe-note {
+  font-size: 14px;
+  color: #65738b;
+  text-align: center;
+}
+.al-criteria {
+  background: #f2f6fb;
+  border-left: 3px solid #3478ec;
+  padding: 18px;
+  display: grid;
+  gap: 8px;
+  margin: 24px 0;
+}
+.al-system {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.al-system .cr-node {
+  flex: 1;
+  min-width: 115px;
+}
+.al-system small {
+  display: block;
+  line-height: 1.7;
+  font-size: 14px;
+  color: #637089;
+}
+.al-system-return {
+  border: 1px dashed #96b6ec;
+  border-top: 0;
+  border-radius: 0 0 18px 18px;
+  margin: 18px 40px;
+  padding: 18px;
+  text-align: center;
+  color: #3c66a6;
+}
+.al-demo button,
+.al-source button {
+  cursor: pointer;
+}
+.al-demo button:focus-visible,
+.al-source button:focus-visible {
+  outline: 3px solid #387de9;
+  outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .al-node {
+    transition: none;
+  }
+}

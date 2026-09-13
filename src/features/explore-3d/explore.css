@@ -1,0 +1,903 @@
+.ex3-page {
+  max-width: 1740px;
+  width: calc(100% - 64px);
+  margin: 0 auto;
+  padding: 20px 0 32px;
+  color: #263246;
+}
+.ex3-page button {
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+}
+.ex3-page button:hover:not(:disabled) {
+  border-color: #a6b6e1;
+  background: #eef2fd;
+}
+.ex3-page :is(button, a, input):focus-visible {
+  outline: 2px solid #4162d4;
+  outline-offset: 3px;
+}
+.ex3-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 17px;
+}
+.ex3-back {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 11px;
+  color: #78849a;
+  margin-bottom: 10px;
+}
+.ex3-kicker {
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  color: #7786a0;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+.ex3-header h1 {
+  font-size: clamp(25px, 2.3vw, 32px);
+  letter-spacing: -0.045em;
+  font-weight: 650;
+  margin: 0 0 10px;
+  line-height: 1.3;
+}
+.ex3-header > div > p:last-child {
+  margin: 0;
+  font-size: 13px;
+  color: #7b8798;
+}
+.ex3-header-note {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-size: 11px;
+  line-height: 1.9;
+  color: #51617b;
+}
+.ex3-header-note > svg {
+  color: #6980b5;
+}
+.ex3-header-note small {
+  color: #939daf;
+  font-size: 10px;
+}
+.ex3-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e0e5ed;
+  margin-bottom: 16px;
+  gap: 16px;
+}
+.ex3-modes {
+  display: inline-flex;
+  gap: 3px;
+  padding: 4px;
+  background: #eaf0f6;
+  border: 1px solid #e4eaf3;
+  border-radius: 10px;
+}
+.ex3-modes button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid transparent;
+  padding: 9px 16px;
+  background: transparent;
+  color: #7b8799;
+  border-radius: 7px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.ex3-modes button.is-active {
+  background: #fff;
+  color: #3454bb;
+  border-color: #e2e7f0;
+  box-shadow: 0 2px 5px #26365e08;
+}
+.ex3-topbar > p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  color: #8c97a9;
+}
+.ex3-status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #8c9ab7;
+}
+.ex3-workspace {
+  display: grid;
+  grid-template-columns: 184px minmax(0, 1fr) 278px;
+  gap: 16px;
+  align-items: start;
+}
+.ex3-nav {
+  border: 1px solid #e2e7f0;
+  background: #ffffffb3;
+  border-radius: 13px;
+  padding: 16px 10px 12px;
+}
+.ex3-nav-heading {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: #8b97a9;
+  margin: 0 3px 17px;
+  letter-spacing: 0.04em;
+}
+.ex3-nav-heading span:first-child {
+  color: #62748e;
+  font-weight: 650;
+}
+.ex3-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f7f9fc;
+  border: 1px solid #e6eaf1;
+  border-radius: 7px;
+  padding: 8px;
+  color: #8b99b0;
+}
+.ex3-search input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  outline: none;
+  color: #334a6f;
+  font-size: 10px;
+}
+.ex3-search button {
+  display: flex;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: #77849a;
+}
+.ex3-concept-list {
+  max-height: 510px;
+  overflow: auto;
+  padding-top: 12px;
+  scrollbar-width: thin;
+}
+.ex3-category {
+  margin-bottom: 5px;
+}
+.ex3-category summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  font-size: 11px;
+  color: #5a6981;
+  padding: 12px 4px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.ex3-category summary::-webkit-details-marker {
+  display: none;
+}
+.ex3-category summary > svg {
+  margin-left: auto;
+  color: #9aa6b8;
+}
+.ex3-category[open] summary > svg {
+  transform: rotate(180deg);
+}
+.ex3-category-number {
+  font-size: 9px;
+  color: #a4afc0;
+}
+.ex3-concept {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  text-align: left;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  padding: 8px;
+  background: transparent;
+  color: #7888a3;
+  gap: 5px;
+}
+.ex3-concept.is-selected {
+  border-color: #cbd6f4;
+  background: #eef2ff;
+}
+.ex3-concept strong {
+  font-size: 10px;
+  display: block;
+  font-weight: 550;
+  color: #43577a;
+}
+.ex3-concept small {
+  display: block;
+  font-size: 9px;
+  margin-top: 3px;
+  color: #929cae;
+}
+.ex3-learned {
+  color: #4b8b72;
+}
+.ex3-nav-caption {
+  font-size: 10px;
+  line-height: 1.8;
+  margin: 5px 3px 10px;
+  color: #7c899e;
+}
+.ex3-nav-note {
+  font-size: 9px;
+  color: #9aa5b5;
+  margin: 18px 2px 0;
+  border-top: 1px solid #eef1f7;
+  padding-top: 12px;
+  line-height: 2;
+}
+.ex3-nav-note svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 3px 0 0;
+}
+.ex3-center {
+  min-width: 0;
+}
+.ex3-world {
+  border: 1px solid #e0e6ef;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f5f7fb;
+}
+.ex3-world-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 13px;
+  border-bottom: 1px solid #e6ebf3;
+  background: #ffffffc7;
+}
+.ex3-world-toolbar > span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #8c98aa;
+  font-size: 10px;
+}
+.ex3-world-toolbar > div {
+  display: flex;
+  gap: 3px;
+}
+.ex3-world-toolbar button {
+  border: 1px solid transparent;
+  padding: 5px 9px;
+  background: transparent;
+  border-radius: 5px;
+  font-size: 10px;
+  color: #8a98af;
+}
+.ex3-world-toolbar button.is-active {
+  color: #4263c1;
+  background: #eef2ff;
+  border-color: #dce3f6;
+}
+.ex3-world-toolbar .ex3-reset {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #556b8e;
+  border: 1px solid #e0e6f0;
+  background: #fff;
+  white-space: nowrap;
+}
+.ex3-world-toolbar .ex3-fullscreen {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #4263c1;
+  background: #eef2ff;
+  border: 1px solid #dce3f6;
+  white-space: nowrap;
+}
+.ex3-immersive-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: #f5f7fb;
+  color: #51617b;
+}
+.ex3-scene {
+  height: clamp(400px, calc(100dvh - 430px), 580px);
+  position: relative;
+  isolation: isolate;
+  background: radial-gradient(ellipse at 55% 40%, #fff 0%, #f0f4fa 75%);
+}
+.ex3-scene > div {
+  width: 100%;
+  height: 100%;
+}
+.ex3-page[data-mode='task'] .ex3-scene,
+.ex3-page[data-mode='guided'] .ex3-scene {
+  height: clamp(300px, calc(100dvh - 600px), 430px);
+}
+.ex3-scene > .ex3-scene-hint {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 4;
+  top: 16px;
+  left: 18px;
+  color: #8090ab;
+  font-size: 10px;
+  width: auto;
+  height: auto;
+  pointer-events: none;
+}
+.ex3-world-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+  padding: 12px 13px;
+  border-top: 1px solid #e6ebf3;
+  background: #ffffffb0;
+  font-size: 9px;
+  color: #9aa6b8;
+}
+.ex3-world-footer > span:first-child {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+}
+.ex3-world-footer i {
+  width: 13px;
+  height: 2px;
+  border-radius: 2px;
+  background: #7d94d5;
+}
+.ex3-world-footer i.ex3-line-tool {
+  background: #5e9f9a;
+}
+.ex3-world-footer i.ex3-line-loop {
+  background: #ce9e6b;
+}
+.ex3-detail {
+  background: #fff;
+  border: 1px solid #e0e7f1;
+  border-radius: 13px;
+  padding: 24px 20px;
+  max-height: 750px;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+.ex3-detail .ex3-kicker {
+  font-size: 9px;
+  letter-spacing: 0.06em;
+}
+.ex3-detail h2 {
+  font-size: 21px;
+  font-weight: 620;
+  line-height: 1.4;
+  margin: 13px 0;
+  letter-spacing: -0.04em;
+}
+.ex3-detail-plain {
+  font-size: 13px;
+  line-height: 1.95;
+  color: #587094;
+  margin: 12px 0 22px;
+}
+.ex3-detail h3 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 550;
+  color: #8c99ad;
+  margin: 0 0 8px;
+}
+.ex3-responsibility {
+  padding: 15px 0;
+  border-top: 1px solid #eef1f6;
+}
+.ex3-responsibility p {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #6c7c94;
+  margin: 0;
+}
+.ex3-relations > h3:not(:first-child) {
+  margin-top: 17px;
+}
+.ex3-relations > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.ex3-relations button,
+.ex3-related button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #6179a6;
+  background: #f6f8fd;
+  border: 1px solid #e8edf7;
+  font-size: 10px;
+  border-radius: 5px;
+  padding: 5px 7px;
+}
+.ex3-relations > div > p {
+  font-size: 10px;
+  line-height: 1.7;
+  color: #8391a6;
+  margin: 0;
+}
+.ex3-definition {
+  margin: 22px 0;
+  border-top: 1px solid #edf1f6;
+  padding-top: 15px;
+}
+.ex3-definition summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  line-height: 1.6;
+  color: #6179a6;
+  cursor: pointer;
+  list-style: none;
+}
+.ex3-definition[open] summary svg {
+  transform: rotate(90deg);
+}
+.ex3-definition p {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #6b7d98;
+}
+.ex3-misconception {
+  background: #f7f8fb;
+  border-left: 2px solid #c2cce1;
+  padding: 10px;
+}
+.ex3-misconception strong {
+  font-size: 10px;
+  font-weight: 500;
+  color: #8290a8;
+}
+.ex3-misconception p {
+  margin-bottom: 0;
+}
+.ex3-related {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 12px;
+}
+.ex3-related > span {
+  width: 100%;
+  font-size: 10px;
+  color: #8b99ad;
+}
+.ex3-course {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding-top: 15px;
+  border-top: 1px solid #edf0f5;
+  color: #96a3b6;
+}
+.ex3-course span {
+  display: block;
+  font-size: 9px;
+  margin-bottom: 4px;
+}
+.ex3-course strong {
+  font-size: 11px;
+  font-weight: 500;
+  color: #617593;
+}
+.ex3-course-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid #e0e6f2;
+  border-radius: 6px;
+  padding: 9px;
+  margin-top: 12px;
+  color: #5675b2;
+  font-size: 10px;
+}
+.ex3-course-link:hover {
+  background: #f3f6ff;
+}
+.ex3-detail-intro {
+  background: linear-gradient(135deg, #fff, #fbfcff);
+  padding-top: 32px;
+}
+.ex3-detail-icon {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #dfe6f6;
+  border-radius: 12px;
+  color: #7892c3;
+  margin-bottom: 27px;
+  background: #f6f8ff;
+}
+.ex3-detail-intro h2 {
+  margin-top: 15px;
+  font-size: 26px;
+}
+.ex3-detail-intro > p:not(.ex3-kicker):not(.ex3-small) {
+  font-size: 12px;
+  line-height: 2;
+  color: #8997ab;
+}
+.ex3-tip {
+  padding: 15px 13px;
+  margin: 23px 0;
+  background: #f2f5fd;
+  border-left: 2px solid #b7c8ef;
+}
+.ex3-tip strong {
+  font-size: 11px;
+  color: #6f87b6;
+  font-weight: 550;
+}
+.ex3-tip p {
+  font-size: 10px;
+  color: #95a3bc;
+  line-height: 1.9;
+  margin-bottom: 0;
+}
+.ex3-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 13px;
+  border-radius: 6px;
+  background: #4564d6;
+  color: #fff;
+  border: 1px solid #4564d6;
+  font-size: 11px;
+}
+.ex3-page button.ex3-primary:hover {
+  background: #3653c2;
+  border-color: #3653c2;
+}
+.ex3-small {
+  font-size: 9px;
+  color: #96a2b6;
+  line-height: 1.9;
+  margin-bottom: 0;
+}
+.ex3-playback {
+  margin-top: 14px;
+  border: 1px solid #dbe3f2;
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+.ex3-playback-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 9px;
+  letter-spacing: 0.09em;
+  color: #8c9bb3;
+}
+.ex3-playback-top button {
+  display: flex;
+  padding: 2px;
+  border: 0;
+  background: transparent;
+  color: #9ca8bb;
+}
+.ex3-playback-main {
+  display: flex;
+  gap: 18px;
+  margin: 16px 0 18px;
+}
+.ex3-step-number {
+  flex: 0 0 35px;
+  color: #5975bf;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1;
+}
+.ex3-step-number small {
+  display: block;
+  font-size: 10px;
+  color: #a1adc1;
+  margin-top: 8px;
+}
+.ex3-playback-main h2 {
+  font-size: 15px;
+  margin: 0 0 7px;
+  font-weight: 600;
+}
+.ex3-playback-main p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.9;
+  color: #7d8ca5;
+}
+.ex3-payload {
+  font-size: 10px;
+  color: #7087af;
+  display: inline-block;
+  background: #f4f7fe;
+  padding: 5px 9px;
+  border-radius: 5px;
+  margin-top: 9px;
+}
+.ex3-tour-question {
+  font-size: 10px;
+  color: #617ba9;
+  font-weight: 500;
+  display: block;
+  margin-top: 12px;
+}
+.ex3-timeline {
+  display: flex;
+  gap: 4px;
+  padding-bottom: 12px;
+}
+.ex3-timeline button {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid #e4eaf5;
+  border-radius: 4px;
+  background: #f7f9fd;
+  height: 26px;
+  font-size: 9px;
+  color: #a0acc0;
+}
+.ex3-timeline button.is-current {
+  background: #5d79d1;
+  color: #fff;
+  border-color: #5d79d1;
+}
+.ex3-timeline button.is-past {
+  background: #e9effd;
+  color: #8095c8;
+  border-color: #dde5f8;
+}
+.ex3-playback-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.ex3-playback-controls > div {
+  display: flex;
+  gap: 7px;
+}
+.ex3-playback-controls button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 9px;
+  border: 1px solid #e5eaf3;
+  border-radius: 6px;
+  background: #fff;
+  color: #8393ad;
+  font-size: 10px;
+}
+.ex3-playback-controls button.ex3-primary {
+  color: #fff;
+  background: #4968d6;
+  border-color: #4968d6;
+}
+.ex3-playback-controls button:disabled {
+  opacity: 0.4;
+}
+.ex3-playback.is-fail {
+  border-color: #e5cbb1;
+}
+.ex3-playback.is-fail .ex3-payload {
+  background: #faf3e9;
+  color: #ad8657;
+}
+.ex3-playback.is-pass {
+  border-color: #c6dbd0;
+}
+.ex3-finish {
+  padding-top: 12px;
+  border-top: 1px solid #edf2f6;
+  color: #568b77;
+  font-size: 10px;
+  line-height: 1.9;
+}
+.ex3-page-note {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  margin-top: 21px;
+  color: #8696b0;
+  font-size: 10px;
+  line-height: 1.9;
+}
+.ex3-page-note p {
+  margin: 0;
+}
+.ex3-page-note p > span {
+  display: block;
+  font-size: 9px;
+  color: #a7b0c0;
+}
+.ex3-page-note > span {
+  color: #a1adc0;
+  font-size: 9px;
+}
+.ex3-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.ex3-static {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+}
+.ex3-static h2 {
+  font-size: 19px;
+  font-weight: 550;
+}
+.ex3-static-nodes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+.ex3-static-nodes button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 9px;
+  background: #ffffffa8;
+  border: 1px solid #dce4f2;
+  padding: 13px;
+  border-radius: 9px;
+  color: #7790be;
+}
+.ex3-static-nodes span,
+.ex3-static-nodes small {
+  font-size: 10px;
+  color: #94a3be;
+}
+.ex3-static-nodes strong {
+  font-size: 11px;
+}
+.ex3-static > p:not(.ex3-kicker) {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #8a9ab2;
+}
+@media (min-width: 1650px) {
+  .ex3-workspace {
+    grid-template-columns: 210px minmax(0, 1fr) 310px;
+    gap: 20px;
+  }
+  .ex3-detail {
+    padding: 28px;
+  }
+}
+@media (max-width: 1200px) {
+  .ex3-page {
+    width: calc(100% - 36px);
+  }
+  .ex3-workspace {
+    grid-template-columns: 158px minmax(0, 1fr) 238px;
+    gap: 10px;
+  }
+  .ex3-detail {
+    padding: 20px 15px;
+  }
+  .ex3-world-footer {
+    flex-wrap: wrap;
+  }
+  .ex3-world-toolbar > span {
+    display: none;
+  }
+  .ex3-scene {
+    height: 530px;
+  }
+}
+@media (max-width: 960px) {
+  .ex3-workspace {
+    grid-template-columns: 160px minmax(0, 1fr);
+  }
+  .ex3-detail {
+    grid-column: 1 / -1;
+    max-height: none;
+  }
+  .ex3-header-note {
+    display: none;
+  }
+  .ex3-scene {
+    height: 520px;
+  }
+}
+@media (max-width: 620px) {
+  .ex3-page {
+    width: calc(100% - 24px);
+  }
+  .ex3-workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ex3-nav {
+    padding-bottom: 10px;
+  }
+  .ex3-concept-list {
+    max-height: 220px;
+  }
+  .ex3-topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .ex3-modes button {
+    font-size: 10px;
+    padding: 9px;
+  }
+  .ex3-scene {
+    height: 470px;
+  }
+  .ex3-page-note {
+    flex-direction: column;
+  }
+  .ex3-static {
+    padding: 20px;
+  }
+  .ex3-timeline {
+    flex-wrap: wrap;
+  }
+  .ex3-timeline button {
+    flex: 0 0 26px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ex3-page *,
+  .ex3-page *::before,
+  .ex3-page *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+  .ex3-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    clip-path: none;
+    overflow: visible;
+    margin: 0;
+    padding: 10px 15px;
+    font-size: 10px;
+    line-height: 1.8;
+    background: #fff;
+    color: #7d8da7;
+  }
+}

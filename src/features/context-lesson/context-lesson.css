@@ -1,0 +1,225 @@
+.ctx-heading h1 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px 22px;
+}
+.ctx-heading h1 > span {
+  font-size: clamp(19px, 2vw, 27px);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  letter-spacing: -0.03em;
+}
+.ctx-studio {
+  scroll-margin-top: 24px;
+}
+.ctx-workspace-layout {
+  grid-template-columns: minmax(0, 1.65fr) minmax(320px, 1fr);
+  min-height: 575px;
+}
+.ctx-explanation {
+  justify-content: flex-start;
+}
+.ctx-explanation .so-why {
+  margin-top: 22px;
+}
+.ctx-prediction {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  margin-top: 24px;
+}
+.ctx-prediction > button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  font-size: 13px;
+  line-height: 1.65;
+  text-align: left;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: white;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+.ctx-prediction > button:hover,
+.ctx-prediction > button.is-selected {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+.ctx-prediction > button > span {
+  font-family: var(--font-mono);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+.ctx-prediction-feedback {
+  padding: 14px;
+  font-size: 13px;
+  color: #35548b;
+  background: #eef3fd;
+  border-radius: 10px;
+}
+.ctx-explanation-flow {
+  display: grid;
+  gap: 6px;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  margin: 20px 0 0;
+}
+.ctx-explanation-flow li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-accent);
+  font-size: 12px;
+}
+.ctx-explanation-flow li > span {
+  width: 100%;
+  text-align: center;
+  padding: 8px 12px;
+  border: 1px solid #e1e7f2;
+  background: #fafbfe;
+  border-radius: 8px;
+}
+.ctx-back-explanation {
+  margin-top: 16px;
+}
+.ctx-practice-link {
+  margin-top: 22px;
+}
+.ctx-learning-sections {
+  display: flex;
+  flex-direction: column;
+}
+.ctx-practice-slot,
+#mini-challenge {
+  scroll-margin-top: 24px;
+}
+.ctx-return-to-flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 16px;
+  padding: 18px 22px;
+  border: 1px solid #ccd8ef;
+  border-radius: 12px;
+  background: #f0f4ff;
+}
+.ctx-return-to-flow p {
+  font-size: 13px;
+  color: #455b7b;
+}
+.ctx-return-to-flow .button {
+  flex-shrink: 0;
+}
+.ctx-misconceptions {
+  margin-top: 40px;
+}
+.ctx-complete-relationship {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  margin: 26px auto;
+  max-width: 650px;
+}
+.ctx-complete-relationship > div {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ctx-complete-relationship > div > span {
+  font-size: 12px;
+  padding: 8px 12px;
+  border: 1px solid #d6e5dc;
+  background: #ffffffb3;
+  border-radius: 7px;
+}
+.ctx-complete-relationship > strong {
+  padding: 10px 28px;
+  border: 1px solid #bfd6ca;
+  border-radius: 10px;
+  background: white;
+  font-size: 14px;
+}
+.ctx-complete-relationship > span {
+  color: #658f79;
+}
+.ctx-takeaways {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+  list-style: none;
+  text-align: left;
+  padding: 0;
+  margin: 24px auto;
+  width: fit-content;
+  max-width: 100%;
+  font-size: 13px;
+  color: #486552;
+}
+.ctx-takeaways li::before {
+  content: '✓';
+  margin-right: 8px;
+}
+.ctx-next-note {
+  margin-top: 20px;
+  font-size: 12px;
+}
+@media (max-width: 1100px) {
+  .ctx-studio .so-chapter-strip ol {
+    gap: 16px;
+  }
+  .ctx-studio .so-case-tag {
+    display: none;
+  }
+}
+@media (max-width: 850px) {
+  .ctx-workspace-layout {
+    grid-template-columns: 1fr;
+  }
+  .ctx-explanation {
+    border-left: 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .ctx-practice-slot {
+    order: 0;
+  }
+  .ctx-terms-slot {
+    order: 1;
+  }
+  .ctx-return-to-flow {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .ctx-studio .so-chapter-strip {
+    padding: 18px;
+    align-items: flex-start;
+  }
+  .ctx-studio .so-chapter-strip ol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 18px;
+  }
+  .ctx-studio .so-chapter-strip li {
+    font-size: 12px;
+  }
+  .ctx-takeaways {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ctx-lesson *,
+  .ctx-lesson *::before,
+  .ctx-lesson *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

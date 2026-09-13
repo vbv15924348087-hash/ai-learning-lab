@@ -1,0 +1,348 @@
+.mp-explorer {
+  font-size: 16px;
+}
+.mp-host {
+  max-width: 540px;
+  margin: 25px auto 0;
+  border: 1px solid #c6d7ee;
+  border-radius: 15px;
+  background: #f5f9ff;
+  padding: 24px;
+  text-align: center;
+  display: grid;
+  gap: 10px;
+}
+.mp-host > strong {
+  font-size: 20px;
+}
+.mp-host > span {
+  font-size: 14px;
+  color: #637da1;
+}
+.mp-client {
+  background: #e3edfc;
+  color: #3369b6;
+  padding: 13px;
+  border-radius: 8px;
+  margin-top: 7px;
+  font-size: 15px;
+}
+.mp-protocol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 22px;
+  color: #7190b7;
+}
+.mp-protocol strong {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+.mp-servers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.mp-server {
+  position: relative;
+  border: 1px solid #d4e0f0;
+  border-radius: 14px;
+  background: #fff;
+  padding: 22px;
+  display: grid;
+  gap: 7px;
+  justify-items: center;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+.mp-server:hover {
+  border-color: #7ba3df;
+  background: #f6f9ff;
+}
+.mp-server.mp-selected {
+  border-color: #4c88e3;
+  background: #edf4ff;
+}
+.mp-server:focus-visible,
+.mp-capability:focus-visible {
+  outline: 3px solid #3379e4;
+  outline-offset: 4px;
+}
+.mp-symbol {
+  display: grid;
+  place-content: center;
+  width: 37px;
+  height: 37px;
+  border-radius: 9px;
+  background: #e6eef9;
+  color: #4874b1;
+  font: 15px monospace;
+  margin-bottom: 8px;
+}
+.mp-server strong {
+  font-size: 19px;
+}
+.mp-server small {
+  color: #7990af;
+  font-size: 13px;
+}
+.mp-server-state {
+  color: #4e7bb9;
+  font-size: 12px;
+  margin-top: 10px;
+}
+.mp-service-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  border: 1px solid #d7e2f1;
+  border-radius: 14px;
+  padding: 24px;
+  margin-top: 24px;
+  min-width: 0;
+}
+.mp-service-detail > div {
+  min-width: 0;
+}
+.mp-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  color: #6987af;
+  line-height: 1.6;
+}
+.mp-service-detail h3 {
+  font-size: 18px;
+  line-height: 1.8;
+}
+.mp-service-detail p {
+  font-size: 15px;
+  line-height: 1.9;
+  color: #607b9f;
+}
+.mp-service-detail code {
+  font-size: 16px;
+  color: #3270c3;
+}
+.mp-service-detail pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #6a82a3;
+  background: #f1f5fa;
+  border-radius: 7px;
+  padding: 12px;
+  margin-bottom: 18px;
+}
+.mp-result {
+  padding: 20px;
+  background: #f1f6fd;
+  border: 1px solid #dce6f5;
+  border-radius: 10px;
+}
+.mp-result small {
+  font-size: 13px;
+  color: #7990ae;
+  line-height: 1.8;
+}
+.mp-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-top: 22px;
+}
+.mp-footer > span {
+  font-size: 13px;
+  color: #647fa3;
+}
+.mp-capabilities {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 22px 0;
+}
+.mp-capability {
+  display: grid;
+  gap: 11px;
+  padding: 22px;
+  border: 1px solid #cfdef0;
+  border-radius: 12px;
+  background: #f7faff;
+  cursor: pointer;
+  text-align: left;
+}
+.mp-capability > span {
+  color: #799dce;
+  font-size: 20px;
+}
+.mp-capability strong {
+  font-size: 19px;
+  color: #3e6ba9;
+}
+.mp-capability small {
+  font-size: 14px;
+  color: #647e9f;
+}
+.mp-capability:hover,
+.mp-capability.mp-selected {
+  border-color: #5e94e1;
+  background: #eaf3ff;
+}
+.mp-example {
+  display: block;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+  line-height: 1.8;
+  color: #4b77b3;
+}
+.mp-transport {
+  padding: 22px;
+  border: 1px solid #d8e3f2;
+  border-radius: 12px;
+  margin: 25px 0;
+  background: #f8faff;
+}
+.mp-transport h3 {
+  font-size: 18px;
+  line-height: 1.8;
+}
+.mp-transport p {
+  font-size: 14px;
+  line-height: 1.9;
+  color: #647e9f;
+}
+.mp-transport-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 20px 0;
+  padding: 16px;
+  background: #e9f0fa;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.mp-transport-line strong {
+  color: #4c7bbc;
+  font-size: 13px;
+}
+.mp-transport-buttons,
+.mp-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.mp-problem {
+  display: flex;
+  align-items: center;
+  gap: 55px;
+  margin: 30px 0;
+}
+.mp-problem-agent {
+  padding: 30px 24px;
+  border: 1px solid #a9c5ec;
+  border-radius: 14px;
+  background: #ecf4ff;
+  color: #3c6aab;
+  font-size: 21px;
+}
+.mp-problem-services {
+  flex: 1;
+  display: grid;
+  gap: 12px;
+}
+.mp-problem-services > div {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  border: 1px solid #dae5f3;
+  border-radius: 9px;
+  padding: 18px;
+  background: #f8faff;
+}
+.mp-problem-services > div::before {
+  content: '→';
+  position: absolute;
+  left: -35px;
+  color: #7297c7;
+}
+.mp-problem-services strong {
+  font-size: 16px;
+}
+.mp-problem-services span {
+  font-size: 14px;
+  color: #7890b0;
+}
+.mp-system-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+.mp-system-flow > div {
+  flex: 1;
+  text-align: center;
+  display: grid;
+  gap: 12px;
+  border: 1px solid #d2e0f3;
+  border-radius: 12px;
+  padding: 24px 14px;
+}
+.mp-system-flow strong {
+  font-size: 14px;
+  line-height: 1.7;
+}
+.mp-system-flow span {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #6f88a9;
+}
+.mp-system-flow .mp-highlight {
+  background: #eaf3ff;
+  border-color: #78a6e8;
+}
+.mp-system-flow > b {
+  font-weight: 400;
+  color: #7495c0;
+}
+.mp-return {
+  border: 1px dashed #97b7e1;
+  border-top: 0;
+  border-radius: 0 0 15px 15px;
+  padding: 20px;
+  margin: 20px 25px;
+  color: #6182ac;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.mp-boundary-statement {
+  padding: 23px;
+  border-radius: 12px;
+  background: #f4f7fb;
+  margin: 24px 0;
+}
+.mp-boundary-statement > span {
+  color: #4e7fc4;
+  font: 13px monospace;
+  margin-right: 18px;
+}
+.mp-boundary-statement strong {
+  font-size: 20px;
+}
+.mp-boundary-statement p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #607694;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mp-server {
+    transition: none;
+  }
+}

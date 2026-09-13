@@ -1,0 +1,136 @@
+.vf-visual {
+  font-size: 16px;
+}
+.vf-report {
+  padding: 28px;
+  margin: 22px 0;
+  border: 1px solid #d8e0eb;
+  border-radius: 14px;
+  background: #fff;
+}
+.vf-report > span {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: #687d96;
+}
+.vf-report h3 {
+  font-size: 22px;
+  line-height: 1.6;
+}
+.vf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+}
+.vf-workbench {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 28px;
+  margin: 24px 0;
+}
+.vf-timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.vf-timeline li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 65px;
+  color: #78869a;
+  font-size: 14px;
+}
+.vf-timeline li > span {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border: 1px solid #cdd6e4;
+  border-radius: 50%;
+  background: #fff;
+}
+.vf-timeline li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 28px;
+  background: #d7e1ed;
+  top: 47px;
+  left: 13px;
+}
+.vf-timeline .vf-current {
+  color: #23599f;
+  font-weight: 650;
+}
+.vf-timeline .vf-current span {
+  border: 2px solid #4479ca;
+  background: #eaf2ff;
+}
+.vf-timeline .vf-complete {
+  color: #31745c;
+}
+.vf-timeline .vf-complete span {
+  background: #eaf6ee;
+  border-color: #b5d5c1;
+}
+.vf-console {
+  padding: 22px;
+  border: 1px solid #d6dfeb;
+  border-radius: 14px;
+  background: #fff;
+}
+.vf-source {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  color: #5a7190;
+}
+.vf-console pre {
+  border-radius: 10px;
+  padding: 20px;
+  background: #f3f6fa;
+  font-size: 15px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+.vf-output {
+  min-height: 150px;
+  padding: 8px 0;
+  line-height: 1.7;
+}
+.vf-fail {
+  color: #ac432d;
+}
+.vf-pass {
+  color: #267054;
+}
+.vf-gate {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 30px 0;
+}
+.vf-gate-branches {
+  display: grid;
+  gap: 14px;
+  margin-left: 12px;
+}
+.vf-visual button:focus-visible {
+  outline: 3px solid #5785cf;
+  outline-offset: 3px;
+}
+.vf-visual button[aria-pressed='true'] {
+  border-color: #4f7cca;
+  background: #edf4ff;
+}
+@media (prefers-reduced-motion: reduce) {
+  .vf-visual * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

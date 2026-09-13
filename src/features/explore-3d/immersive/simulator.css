@@ -1,0 +1,436 @@
+/* Desktop simulator chrome stays below 20% of a 768px viewport at rest. */
+.im3-dialog {
+  z-index: 2147483000;
+}
+.im3-header {
+  flex-basis: 58px;
+  gap: 14px;
+  padding: 8px 20px;
+}
+.im3-brand {
+  min-width: 156px;
+}
+.im3-brand small {
+  font-size: 9px;
+}
+.im3-subbar {
+  flex-basis: 38px;
+  padding: 3px 20px;
+}
+.im3-modes {
+  flex-basis: 44px;
+  padding-block: 4px;
+}
+.im3-search {
+  width: min(300px, 24vw);
+}
+.sim-task-select {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  white-space: nowrap;
+}
+.sim-task-select > span {
+  font-size: 10px;
+  color: #7b89a0;
+}
+.sim-task-select select,
+.sim-compare select {
+  max-width: 205px;
+  border: 1px solid #dfe6f1;
+  border-radius: 7px;
+  background: #f8faff;
+  color: #3f5b8c;
+  padding: 8px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.sim-welcome {
+  position: absolute;
+  z-index: 35;
+  left: 24px;
+  bottom: 26px;
+  max-width: 370px;
+  padding: 18px 20px;
+  border: 1px solid #dce5f2;
+  border-radius: 12px;
+  background: #ffffffee;
+  box-shadow: 0 8px 35px #20395b08;
+}
+.sim-welcome h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #3e587d;
+  margin: 9px 0;
+}
+.sim-welcome p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #7387a3;
+  margin: 0 0 14px;
+}
+.sim-task-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 5px 4px 12px;
+  border: 1px solid #dfe6f2;
+  border-radius: 8px;
+  background: #fffffff2;
+}
+.sim-task-actions > strong {
+  font-size: 12px;
+  font-weight: 550;
+  color: #47648c;
+}
+.sim-task-actions > button {
+  padding: 6px 9px;
+  font-size: 11px;
+}
+.sim-live-dot {
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+  background: #6f9bca;
+}
+.im3-shell .sim-level-badge {
+  border-color: transparent;
+  background: transparent;
+  color: #7492bf;
+  letter-spacing: 2px;
+  padding-inline: 4px;
+  font-size: 10px;
+}
+.sim-flow-key {
+  position: absolute;
+  z-index: 30;
+  bottom: 14px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  white-space: nowrap;
+  padding: 9px 14px;
+  border: 1px solid #e0e7f0;
+  background: #ffffffed;
+  border-radius: 8px;
+  color: #637da1;
+  font-size: 10px;
+  pointer-events: none;
+}
+.sim-flow-key i {
+  width: 1px;
+  height: 13px;
+  background: #d6e0f0;
+}
+.im3-workspace.has-detail .sim-flow-key,
+.im3-workspace.has-nav .sim-flow-key {
+  display: none;
+}
+.sim-section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.sim-section-title strong {
+  color: #405c82;
+  font-size: 12px;
+  font-weight: 550;
+}
+.sim-section-title > span {
+  color: #7e93af;
+  font-size: 10px;
+}
+.sim-complexity {
+  border-top: 1px solid #e4eaf4;
+  border-bottom: 1px solid #e4eaf4;
+  padding: 20px 0 8px;
+  margin-top: 20px;
+}
+.sim-metric {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 10px 0;
+}
+.sim-metric > span {
+  min-width: 55px;
+  font-size: 11px;
+  color: #6b80a0;
+}
+.sim-metric small {
+  min-width: 27px;
+  font-size: 10px;
+  color: #7a8fad;
+}
+.sim-metric meter {
+  width: 100%;
+  height: 8px;
+  border: 0;
+  background: #edf1f8;
+  border-radius: 2px;
+}
+.sim-metric meter::-webkit-meter-bar,
+.sim-context-capacity meter::-webkit-meter-bar {
+  background: #e7edf8;
+  border: 0;
+  border-radius: 3px;
+}
+.sim-metric meter::-webkit-meter-optimum-value {
+  background: #7697cf;
+}
+.sim-metric meter::-moz-meter-bar {
+  background: #7697cf;
+}
+.sim-complexity p,
+.sim-ladder p {
+  font-size: 10px;
+  line-height: 1.8;
+}
+.sim-ladder {
+  padding: 20px 0 0;
+}
+.sim-ladder .sim-section-title {
+  margin-bottom: 12px;
+}
+.sim-ladder label {
+  font-size: 10px;
+  color: #758ba7;
+}
+.sim-ladder input {
+  width: 100%;
+  margin: 14px 0 5px;
+  accent-color: #5578c4;
+  cursor: pointer;
+}
+.sim-ladder-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #8b9cb4;
+}
+.sim-path-heading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-top: 1px solid #e5ebf4;
+  padding-top: 18px;
+}
+.sim-path-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sim-path-list li {
+  position: relative;
+}
+.sim-path-list li + li::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: -3px;
+  height: 7px;
+  width: 1px;
+  background: #d9e4f5;
+}
+.im3-shell .sim-path-list button {
+  display: flex;
+  width: 100%;
+  text-align: left;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 10px 6px;
+  margin-bottom: 5px;
+  border-color: transparent;
+  background: transparent;
+}
+.im3-shell .sim-path-list button[aria-current='step'] {
+  background: #edf3ff;
+  border-color: #dce6fa;
+}
+.sim-path-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #edf2f9;
+  color: #6f8dbd;
+  font-size: 10px;
+}
+.sim-path-list strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 550;
+  margin-top: 4px;
+}
+.sim-path-list small {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  color: #7c8ea8;
+  line-height: 1.8;
+}
+.sim-node-reason {
+  margin-top: 0;
+}
+.sim-compare {
+  position: absolute;
+  top: 101px;
+  left: 18px;
+  z-index: 40;
+  padding: 12px;
+  border: 1px solid #dbe4f0;
+  border-radius: 10px;
+  background: #fffffff2;
+  box-shadow: 0 6px 25px #294c7b07;
+}
+.sim-compare-selects {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  color: #7c91ad;
+}
+.sim-compare-selects label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sim-compare select {
+  max-width: 154px;
+  font-size: 11px;
+  padding: 6px;
+}
+.sim-path-a {
+  color: #9365ad;
+  font-weight: 600;
+}
+.sim-path-b {
+  color: #258b77;
+  font-weight: 600;
+}
+.sim-compare p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+  font-size: 10px;
+  color: #8292a9;
+  margin: 10px 0 0;
+}
+.sim-compare .im3-segment {
+  border: 0;
+  padding: 0;
+}
+.sim-compare .im3-segment button {
+  font-size: 10px;
+  padding: 6px 9px;
+}
+.im3-timeline {
+  padding: 10px 22px 8px;
+}
+.im3-step-copy p {
+  max-width: 1050px;
+}
+.im3-step-buttons {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  padding-bottom: 3px;
+}
+.im3-step-buttons button {
+  min-width: 20px;
+}
+.sim-context-capacity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 7px 0;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #edf3fc;
+  color: #6981a5;
+  font-size: 10px;
+}
+.sim-context-capacity meter {
+  width: 145px;
+  height: 10px;
+}
+.sim-context-capacity meter::-webkit-meter-optimum-value {
+  background: #7b9fcf;
+}
+.sim-context-capacity strong {
+  color: #496c9e;
+  min-width: 25px;
+}
+.sim-context-capacity small {
+  font-size: 10px;
+}
+.sim-approval {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 9px 0;
+  padding: 10px 12px;
+  border: 1px solid #dfc79e;
+  border-radius: 7px;
+  background: #fff8eb;
+}
+.sim-approval > div {
+  flex: 1;
+}
+.sim-approval strong {
+  display: block;
+  font-size: 11px;
+  color: #967340;
+}
+.sim-approval span {
+  display: block;
+  font-size: 10px;
+  color: #9b8a6c;
+  margin-top: 4px;
+}
+.sim-approval button {
+  font-size: 11px;
+}
+.sim-stopped {
+  color: #9e6d50;
+  background: #fbefe7;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+}
+@media (max-width: 1200px) {
+  .im3-header {
+    gap: 9px;
+    padding-inline: 14px;
+  }
+  .im3-brand {
+    min-width: 140px;
+  }
+  .sim-task-select {
+    gap: 6px;
+  }
+  .sim-task-select > span {
+    display: none;
+  }
+  .sim-task-select select {
+    max-width: 168px;
+  }
+  .im3-search {
+    width: 22vw;
+  }
+  .sim-compare {
+    max-width: calc(100% - 36px);
+  }
+  .sim-compare-selects {
+    gap: 6px;
+  }
+  .sim-compare select {
+    max-width: 130px;
+  }
+}

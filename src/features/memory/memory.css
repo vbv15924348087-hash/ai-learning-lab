@@ -1,0 +1,234 @@
+.mm-lifecycle {
+  font-size: 16px;
+}
+.mm-task-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 22px;
+}
+.mm-task-label > strong {
+  font-size: 12px;
+  color: #557ba8;
+  letter-spacing: 0.06em;
+}
+.mm-columns {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 20px;
+}
+.mm-work,
+.mm-vault {
+  border: 1px solid #d8e3f0;
+  border-radius: 14px;
+  padding: 22px;
+  min-width: 0;
+}
+.mm-work {
+  background: #fff;
+}
+.mm-vault {
+  background: #f1f5fb;
+}
+.mm-eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #6b85a6;
+}
+.mm-work h3,
+.mm-vault h3 {
+  font-size: 19px;
+  line-height: 1.75;
+  margin: 15px 0 20px;
+}
+.mm-pick {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border: 1px solid #dce5f0;
+  padding: 16px;
+  border-radius: 10px;
+  margin: 12px 0;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1.75;
+}
+.mm-pick:hover {
+  border-color: #79a3e2;
+  background: #f7faff;
+}
+.mm-pick:focus-within {
+  outline: 3px solid #377be2;
+  outline-offset: 3px;
+}
+.mm-pick input {
+  margin-top: 6px;
+  width: 17px;
+  height: 17px;
+  accent-color: #377be2;
+  flex-shrink: 0;
+}
+.mm-pick small {
+  display: block;
+  color: #6c83a3;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+.mm-picked {
+  border-color: #78a4e6;
+  background: #edf4ff;
+}
+.mm-empty {
+  color: #627793;
+  padding: 22px 8px;
+  line-height: 1.85;
+  font-size: 15px;
+}
+.mm-stored {
+  border: 1px solid #d5e0ef;
+  border-radius: 10px;
+  background: #fff;
+  margin: 12px 0;
+  padding: 15px;
+}
+.mm-stored small {
+  font-size: 12px;
+  color: #6886ad;
+}
+.mm-stored p {
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 9px 0 0;
+}
+.mm-stored.mm-found {
+  border-color: #4b85df;
+  background: #e8f1ff;
+}
+.mm-context-line {
+  border: 1px solid #dce6f2;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #67809f;
+}
+.mm-context-memory {
+  display: grid;
+  gap: 12px;
+  margin-top: 15px;
+  background: #e9f2ff;
+  border: 1px solid #71a0e6;
+  border-radius: 10px;
+  padding: 18px;
+}
+.mm-context-memory span {
+  font-size: 12px;
+  color: #4576b8;
+}
+.mm-context-memory strong {
+  font-size: 15px;
+  line-height: 1.85;
+  font-weight: 500;
+}
+.mm-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+.mm-boundary {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 24px;
+}
+.mm-boundary section {
+  padding: 20px;
+  border: 1px solid #dce5f1;
+  border-radius: 12px;
+  background: #f8faff;
+}
+.mm-boundary section > span {
+  font-size: 12px;
+  color: #6f88a9;
+}
+.mm-boundary h3 {
+  font-size: 17px;
+  line-height: 1.8;
+  margin: 12px 0;
+}
+.mm-boundary .mm-actions {
+  margin: 12px 0 0;
+}
+.mm-before-after {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.mm-before-after section {
+  flex: 1;
+  border: 1px solid #d6e2f1;
+  border-radius: 14px;
+  padding: 24px;
+  background: #f7faff;
+}
+.mm-before-after h3 {
+  font-size: 20px;
+  line-height: 1.8;
+}
+.mm-before-after p {
+  font-size: 15px;
+  color: #637994;
+  line-height: 1.8;
+}
+.mm-before-after section.mm-new-task {
+  border-color: #6098e9;
+  background: #eef5ff;
+}
+.mm-faded {
+  opacity: 0.6;
+}
+.mm-types {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.mm-type {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  padding: 24px;
+  text-align: left;
+  border: 1px solid #d7e3f3;
+  background: #f8faff;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.mm-type small {
+  font-size: 12px;
+  color: #7290b5;
+}
+.mm-type strong {
+  font-size: 17px;
+  color: #315f9f;
+}
+.mm-type span {
+  font-size: 15px;
+  color: #637b9a;
+}
+.mm-type b {
+  position: absolute;
+  right: 17px;
+  top: 16px;
+  color: #4d82ce;
+}
+.mm-type:hover,
+.mm-type.mm-selected {
+  border-color: #669ae6;
+  background: #edf4ff;
+}
+.mm-type:focus-visible {
+  outline: 3px solid #377be2;
+  outline-offset: 3px;
+}

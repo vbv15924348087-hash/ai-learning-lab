@@ -1,0 +1,408 @@
+.so-terminology,
+.so-challenge {
+  min-width: 0;
+  padding-block: var(--space-7);
+}
+
+.so-assessment-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+
+.so-assessment-eyebrow,
+.so-terminology-count {
+  color: var(--color-text-secondary);
+  font-size: var(--type-caption);
+}
+
+.so-assessment-eyebrow {
+  margin-bottom: var(--space-2);
+}
+
+.so-assessment-heading h2 {
+  font-size: clamp(1.25rem, 2.6vw, 1.5rem);
+  line-height: 1.5;
+}
+
+.so-terminology-count {
+  flex-shrink: 0;
+}
+
+.so-term-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.so-term-card {
+  min-width: 0;
+  padding: var(--space-5) var(--space-4);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  background: var(--color-background);
+}
+
+.so-term-card-unlocked {
+  color: var(--color-text-primary);
+  border-style: solid;
+  background: var(--color-surface);
+}
+
+.so-term-icon {
+  display: block;
+  margin-bottom: var(--space-4);
+}
+
+.so-term-card-unlocked .so-term-icon {
+  color: var(--color-accent);
+}
+
+.so-term-card h3 {
+  overflow-wrap: anywhere;
+  font-size: var(--type-body);
+  line-height: 1.5;
+}
+
+.so-term-chinese {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--type-caption);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+
+.so-term-card p {
+  margin-top: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: var(--type-caption);
+  line-height: 1.75;
+}
+
+.so-term-pending {
+  display: block;
+  margin-top: var(--space-4);
+  font-size: var(--type-caption);
+}
+
+.so-challenge {
+  border-top: 1px solid var(--color-border);
+}
+
+.so-challenge-heading-icon {
+  color: var(--color-accent);
+}
+
+.so-challenge-locked,
+.so-challenge-status {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.so-challenge-locked {
+  color: var(--color-text-secondary);
+}
+
+.so-challenge-locked > svg,
+.so-challenge-status > svg {
+  margin-top: 3px;
+}
+
+.so-challenge-locked p,
+.so-challenge-status p {
+  font-size: var(--type-body-small);
+}
+
+.so-challenge-status {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent);
+}
+
+.so-challenge-status > svg {
+  color: var(--color-accent);
+}
+
+.so-challenge-status p {
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+}
+
+.so-answer-review {
+  margin-top: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.so-answer-review summary {
+  min-height: 48px;
+  padding: var(--space-4) var(--space-5);
+  cursor: pointer;
+  font-size: var(--type-body-small);
+}
+
+.so-answer-review > div {
+  display: grid;
+  gap: var(--space-3);
+  padding: 0 var(--space-5) var(--space-5);
+  color: var(--color-text-secondary);
+  font-size: var(--type-body-small);
+  overflow-wrap: anywhere;
+}
+
+.so-challenge-intro {
+  max-width: 800px;
+  margin-bottom: var(--space-6);
+  color: var(--color-text-secondary);
+  font-size: var(--type-body-small);
+}
+
+.so-challenge-question {
+  min-width: 0;
+  margin: 0 0 var(--space-6);
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.so-challenge-question legend {
+  max-width: 100%;
+  padding-inline: var(--space-2);
+  font-size: var(--type-body-small);
+  font-weight: 600;
+  line-height: 1.8;
+}
+
+.so-question-hint {
+  color: var(--color-text-secondary);
+  font-size: var(--type-caption);
+}
+
+.so-challenge-flow {
+  display: grid;
+  grid-template-columns: auto minmax(140px, 1fr) auto minmax(140px, 1fr) auto;
+  align-items: end;
+  gap: var(--space-2);
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.so-flow-fixed,
+.so-flow-slot {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.so-flow-fixed {
+  min-height: 52px;
+  font-size: var(--type-body-small);
+}
+
+.so-flow-slot {
+  align-items: flex-end;
+}
+
+.so-flow-slot > div {
+  min-width: 0;
+  width: 100%;
+}
+
+.so-flow-slot > .so-flow-arrow {
+  margin-bottom: 17px;
+}
+
+.so-flow-slot label {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--type-caption);
+  line-height: 1.7;
+}
+
+.so-flow-arrow {
+  color: var(--color-text-secondary);
+}
+
+.so-flow-sublabel {
+  display: block;
+  font-size: var(--type-caption);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.so-flow-slot select {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 52px;
+  padding: var(--space-3) var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  font-size: var(--type-body-small);
+  color: var(--color-text-primary);
+  background: var(--color-background);
+  cursor: pointer;
+}
+
+.so-flow-slot select[aria-invalid='true'] {
+  border-color: var(--color-danger);
+}
+
+.so-judgment-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.so-judgment-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 76px;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.so-judgment-option:has(input:checked) {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.so-judgment-option input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  flex-shrink: 0;
+  accent-color: var(--color-accent);
+}
+
+.so-judgment-option strong,
+.so-judgment-option > span > span {
+  display: block;
+  font-size: var(--type-body-small);
+  line-height: 1.7;
+}
+
+.so-judgment-option > span > span {
+  color: var(--color-text-secondary);
+  font-size: var(--type-caption);
+}
+
+.so-answer-feedback {
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-left: 2px solid var(--color-accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--color-text-primary);
+  background: var(--color-accent-soft);
+  font-size: var(--type-body-small);
+}
+
+.so-challenge-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.so-check-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  min-height: 48px;
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  color: var(--color-surface);
+  background: var(--color-accent);
+  font-weight: 500;
+}
+
+.so-check-button:hover {
+  background: var(--color-accent-hover);
+}
+
+.so-challenge-actions p {
+  color: var(--color-text-secondary);
+  font-size: var(--type-caption);
+}
+
+@media (max-width: 1100px) {
+  .so-term-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .so-challenge-flow {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+
+  .so-flow-fixed,
+  .so-flow-slot {
+    min-height: 44px;
+  }
+
+  .so-flow-arrow {
+    transform: rotate(90deg);
+  }
+
+  .so-flow-fixed:first-child {
+    padding-left: 25px;
+  }
+}
+
+@media (max-width: 600px) {
+  .so-assessment-heading {
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .so-terminology .so-assessment-heading {
+    flex-direction: column;
+  }
+
+  .so-term-grid,
+  .so-judgment-options {
+    grid-template-columns: 1fr;
+  }
+
+  .so-term-card {
+    padding: var(--space-4);
+  }
+
+  .so-term-icon {
+    margin-bottom: var(--space-3);
+  }
+
+  .so-challenge-question {
+    padding: var(--space-4);
+  }
+
+  .so-challenge-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .so-challenge-actions p {
+    text-align: center;
+  }
+}

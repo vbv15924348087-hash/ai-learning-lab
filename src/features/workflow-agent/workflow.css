@@ -1,0 +1,128 @@
+.wf-visual {
+  font-size: 16px;
+}
+.wf-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 20px 0;
+}
+.wf-compare > section {
+  border: 1px solid #dce3ea;
+  border-radius: 16px;
+  background: #fff;
+  padding: 24px;
+}
+.wf-visual h3 {
+  margin: 0 0 20px;
+  font-size: 20px;
+}
+.wf-visual h3 small {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  color: #627081;
+  margin-top: 5px;
+}
+.wf-route {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+  display: grid;
+  gap: 12px;
+}
+.wf-route li {
+  position: relative;
+  padding: 13px 16px;
+  border: 1px solid #dae2eb;
+  border-radius: 10px;
+  background: #f7f9fc;
+  transition: background-color 0.25s;
+}
+.wf-route li:not(:last-child)::after {
+  content: '↓';
+  position: absolute;
+  left: 28px;
+  bottom: -16px;
+  color: #7e8b9b;
+}
+.wf-route li > span {
+  font-weight: 700;
+  color: #3563bc;
+  margin-right: 14px;
+}
+.wf-route li small {
+  display: block;
+  margin-top: 4px;
+  color: #9b4230;
+}
+.wf-route .wf-failed {
+  background: #fff1ea;
+  border-color: #eac3b7;
+}
+.wf-route .wf-success {
+  background: #eaf5f0;
+  border-color: #b0d3c3;
+}
+.wf-goal {
+  border: 1px solid #b8d0ef;
+  padding: 18px;
+  border-radius: 12px;
+  background: #eef5ff;
+  font-weight: 600;
+}
+.wf-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 18px;
+}
+.wf-visual button {
+  cursor: pointer;
+}
+.wf-options button,
+.wf-hybrid button {
+  border: 1px solid #bdcadd;
+  border-radius: 10px;
+  background: #fff;
+  padding: 15px 12px;
+  color: #263d5f;
+  font: inherit;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+.wf-options button:hover:not(:disabled),
+.wf-hybrid button:hover {
+  background: #eef5ff;
+  border-color: #6287c9;
+}
+.wf-options button[aria-pressed='true'],
+.wf-hybrid button[aria-pressed='true'] {
+  background: #e9f1ff;
+  border-color: #4273c7;
+}
+.wf-visual button:focus-visible {
+  outline: 3px solid #5787d8;
+  outline-offset: 3px;
+}
+.wf-visual button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+.wf-hybrid {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 0;
+}
+.wf-hybrid > div,
+.wf-hybrid > button {
+  flex: 1;
+  text-align: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wf-visual * {
+    transition: none !important;
+  }
+}

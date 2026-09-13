@@ -1,0 +1,137 @@
+.gr-visual {
+  font-size: 16px;
+}
+.gr-call {
+  background: #fff;
+  border: 1px solid #d8e0eb;
+  border-radius: 14px;
+  padding: 24px;
+  margin: 24px 0;
+}
+.gr-call > span {
+  color: #63758b;
+  font-size: 14px;
+}
+.gr-call pre {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #364c6a;
+}
+.gr-call p {
+  margin-bottom: 0;
+  color: #68778a;
+}
+.gr-flow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 28px 0;
+}
+.gr-flow .cr-node {
+  flex: 1;
+  text-align: center;
+}
+.gr-request-line {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  background: #f1f5fa;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin: 20px 0;
+}
+.gr-request-line > span {
+  font-size: 14px;
+  color: #66788f;
+}
+.gr-approval {
+  border: 1px solid #ddc5b7;
+  border-radius: 14px;
+  background: #fff;
+  padding: 26px;
+  margin: 22px 0;
+}
+.gr-risk {
+  display: inline-block;
+  border: 1px solid #dfbeac;
+  background: #fff4eb;
+  border-radius: 6px;
+  padding: 7px 10px;
+  color: #96502e;
+  font-size: 13px;
+  font-weight: 650;
+}
+.gr-approval h3 {
+  font-size: 21px;
+  margin: 22px 0;
+}
+.gr-approval dl {
+  display: grid;
+  gap: 12px;
+}
+.gr-approval dl > div {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 10px;
+}
+.gr-approval dt {
+  color: #718097;
+}
+.gr-approval dd {
+  margin: 0;
+}
+.gr-simulation {
+  background: #f3f7fc;
+  padding: 15px 18px;
+  border-radius: 8px;
+  color: #49627f;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.gr-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 20px 0;
+}
+.gr-layers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 30px 0;
+}
+.gr-layers button {
+  text-align: left;
+  padding: 24px 18px;
+  border: 1px solid #c3d1e3;
+  border-radius: 12px;
+  background: #fff;
+  color: #354f73;
+  font: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.gr-layers button strong,
+.gr-layers button small {
+  display: block;
+  margin-top: 14px;
+}
+.gr-layers button > span,
+.gr-layers button small {
+  color: #6a7d96;
+  font-size: 14px;
+}
+.gr-layers button:hover,
+.gr-layers button[aria-pressed='true'] {
+  background: #eff5ff;
+  border-color: #5981bc;
+}
+.gr-visual button:focus-visible {
+  outline: 3px solid #5986ce;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .gr-visual * {
+    transition: none !important;
+  }
+}
