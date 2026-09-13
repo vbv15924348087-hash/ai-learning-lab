@@ -24,6 +24,7 @@ import { useLearningStore } from '../../stores/learningStore'
 import { exploreNodes } from './data'
 import { getDisplayedConnections, getRelations, getVisibleNodes } from './graph'
 import { ConceptNavigator } from './ConceptNavigator'
+import { CategoryLegend } from './CategoryLegend'
 import { NodeDetail } from './NodeDetail'
 import { PlaybackPanel } from './PlaybackPanel'
 import { StaticSystem } from './StaticSystem'
@@ -217,6 +218,7 @@ export function ExploreExperience() {
                 Final。左侧概念导航与右侧详情可替代三维操作。
               </p>
             </div>
+            <CategoryLegend />
             <div className="ex3-world-footer">
               <span>
                 <i className="ex3-line-data" /> 信息 <i className="ex3-line-tool" /> 行动{' '}

@@ -30,6 +30,7 @@ import {
 } from 'lucide-react'
 import { useLearningStore } from '../../../stores/learningStore'
 import { ConceptNavigator } from '../ConceptNavigator'
+import { CategoryLegend } from '../CategoryLegend'
 import { StaticSystem } from '../StaticSystem'
 import { ExperimentPanel } from './ExperimentPanel'
 import { ImmersiveDetail } from './ImmersiveDetail'
@@ -296,6 +297,7 @@ export default function ImmersiveLab({
               </>
             )}
           </nav>
+          <CategoryLegend />
           {c.scope && <span className="im3-scope-note">一次只拆开一个模块</span>}
           {c.view === 'experiments' && (
             <button
@@ -530,7 +532,9 @@ export default function ImmersiveLab({
                   暖色虚线：反馈与重试
                 </p>
                 <p>✓ 已学 · ○ 可学 · 锁：完整课程待解锁</p>
-                <p>立体区域表示分工；连线表示连接。所有概念都能探索。</p>
+                <p>
+                  节点颜色表示职责类别，对应顶部色彩图例；连线颜色表示信息流动。所有概念都能探索。
+                </p>
                 <p>R 回全景 · F 浏览器全屏 · Space 播放 / 暂停 · Esc 退出 · ← → 切换步骤</p>
               </section>
             )}

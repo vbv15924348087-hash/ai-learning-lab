@@ -5,6 +5,8 @@ import type { ExploreConnection, ExploreNode } from '../types'
 import { explainConnection } from './connections'
 import type { ExplanationLevel, ModuleId } from './types'
 import type { ReactNode } from 'react'
+import { categoryColorStyle } from '../categoryColors'
+import { categoryLabels } from '../data'
 
 export function ImmersiveDetail({
   node,
@@ -40,7 +42,11 @@ export function ImmersiveDetail({
   const available = node && unlockedLessons.includes(node.lessonId)
   const lesson = node ? getLessonById(node.lessonId) : undefined
   return (
-    <aside className="im3-detail im3-panel" aria-label="沉浸详情">
+    <aside
+      className="im3-detail im3-panel"
+      style={node ? categoryColorStyle(node.category) : undefined}
+      aria-label="沉浸详情"
+    >
       <div className="im3-panel-heading">
         <span>{edge ? '这条连接为什么存在' : '理解这个部分'}</span>
         <button aria-label="收起节点详情" onClick={onClose}>
@@ -62,7 +68,9 @@ export function ImmersiveDetail({
       {node ? (
         <>
           {pathExplanation}
-          <span className="im3-eyebrow">{node.label}</span>
+          <span className="im3-eyebrow im3-module-category">
+            {categoryLabels[node.category]} · {node.label}
+          </span>
           <h2>{node.chineseLabel}</h2>
           <p className="im3-plain">{node.description}</p>
           <h3>它负责什么</h3>

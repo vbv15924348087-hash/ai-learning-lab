@@ -3,6 +3,7 @@ import { Check, ChevronDown, Circle, LockKeyhole, Search, X } from 'lucide-react
 import { categoryLabels, exploreNodes } from './data'
 import { searchNodes } from './graph'
 import type { ExploreCategory, ExploreNode } from './types'
+import { categoryColorStyle } from './categoryColors'
 
 export function ConceptNavigator({
   selectedId,
@@ -25,6 +26,7 @@ export function ConceptNavigator({
       <button
         key={node.id}
         className={`ex3-concept ${selectedId === node.id ? 'is-selected' : ''}`}
+        style={categoryColorStyle(node.category)}
         aria-label={`探索 ${node.label}，${status}`}
         aria-pressed={selectedId === node.id}
         onClick={() => onSelect(node.id)}
@@ -75,7 +77,7 @@ export function ConceptNavigator({
           </>
         ) : (
           (Object.keys(categoryLabels) as ExploreCategory[]).map((category, index) => (
-            <details key={category} className="ex3-category">
+            <details key={category} className="ex3-category" style={categoryColorStyle(category)}>
               <summary>
                 <span className="ex3-category-number">0{index + 1}</span>
                 {categoryLabels[category]}

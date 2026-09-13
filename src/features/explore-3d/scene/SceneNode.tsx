@@ -5,6 +5,7 @@ import { useThree, type ThreeEvent } from '@react-three/fiber'
 import { NodeGeometry } from './NodeGeometry'
 import type { ExploreNode } from '../types'
 import { nodeVisualGrammar } from './visualGrammar'
+import { categoryColors, categoryColorStyle } from '../categoryColors'
 
 export const SceneNode = memo(function SceneNode({
   node,
@@ -40,6 +41,7 @@ export const SceneNode = memo(function SceneNode({
   const highlighted = selected || hovered
   const core = node.level === 0
   const grammar = nodeVisualGrammar(node)
+  const palette = categoryColors[node.category]
   const baseScale = immersive ? grammar.scale : core ? 1 : 0.84
   const scale = baseScale * (hovered || (immersive && selected) ? 1.05 : 1)
   const learningStatus = learned ? '已学' : unlocked ? '可学习' : '课程未解锁，可在此探索'
@@ -72,27 +74,28 @@ export const SceneNode = memo(function SceneNode({
       >
         <NodeGeometry
           kind={node.kind}
+          category={node.category}
           nodeId={node.id}
           immersive={immersive}
           opacity={disabled ? 0.24 : xray ? 0.2 : dimmed && !hovered ? 0.32 : 1}
         />
         <mesh position={[0, -0.85, 0]} rotation={[-Math.PI / 2, 0, 0]}>
           <ringGeometry
-            args={[core ? 1.66 : 1.05, (core ? 1.66 : 1.05) + (highlighted ? 0.065 : 0.018), 48]}
+            args={[core ? 1.66 : 1.05, (core ? 1.66 : 1.05) + (highlighted ? 0.075 : 0.035), 48]}
           />
           <meshBasicMaterial
             color={
               disabled
                 ? '#b3987e'
                 : highlighted
-                  ? '#2d72d0'
+                  ? palette.dark
                   : comparisonRole === 'first'
                     ? '#9967b4'
                     : comparisonRole === 'second'
                       ? '#278c78'
                       : related
-                        ? '#87abd6'
-                        : '#c7d6e6'
+                        ? palette.accent
+                        : palette.body
             }
             transparent
             opacity={dimmed ? 0.3 : 0.8}
@@ -121,6 +124,8 @@ export const SceneNode = memo(function SceneNode({
             ref={(element) => registerLabel(node.id, element)}
             type="button"
             className="explore-scene-label"
+            style={categoryColorStyle(node.category)}
+            data-category={node.category}
             data-selected={selected}
             data-dimmed={dimmed}
             data-core={core}

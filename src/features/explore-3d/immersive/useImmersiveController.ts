@@ -444,20 +444,11 @@ export function useImmersiveController(initial: ImmersiveInitial, reducedMotion:
     setDepth(next)
     setCameraPose(undefined)
   }, [])
-  const changeCamera = useCallback(
-    (pose: CameraPose, nextDepth?: ExploreDepth) => {
-      setCameraPose(pose)
-      if (
-        nextDepth !== undefined &&
-        !scope &&
-        view !== 'relations' &&
-        view !== 'task' &&
-        view !== 'compare'
-      )
-        setDepth(nextDepth)
-    },
-    [scope, view],
-  )
+  // Ignore any legacy depth hint: only the level buttons or Reset change
+  // disclosure, so manual camera gestures preserve the chosen modules.
+  const changeCamera = useCallback((pose: CameraPose) => {
+    setCameraPose(pose)
+  }, [])
   const whyThis = useCallback(
     (nodeId: string) => whyThisNode(taskScenario, nodeId, level),
     [taskScenario, level],

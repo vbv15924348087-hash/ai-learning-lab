@@ -11,6 +11,7 @@ import { getLessonById } from '../../content/lessons'
 import { categoryLabels } from './data'
 import { getRelations } from './graph'
 import type { ExploreNode } from './types'
+import { categoryColorStyle } from './categoryColors'
 
 export function NodeDetail({
   node,
@@ -53,7 +54,12 @@ export function NodeDetail({
   const available = unlockedLessons.includes(node.lessonId)
   const learned = completedLessons.includes(node.lessonId)
   return (
-    <aside className="ex3-detail" aria-label="节点详情" aria-live="polite">
+    <aside
+      className="ex3-detail ex3-detail-colored"
+      style={categoryColorStyle(node.category)}
+      aria-label="节点详情"
+      aria-live="polite"
+    >
       <p className="ex3-kicker">
         {categoryLabels[node.category]} · {node.label}
       </p>

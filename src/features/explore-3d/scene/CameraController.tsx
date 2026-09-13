@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, type ComponentRef } from 'react'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import { PerspectiveCamera as ThreePerspectiveCamera, Spherical, Vector3 } from 'three'
-import type { CameraPose, ExploreDepth, ExploreSceneProps } from '../types'
+import type { CameraPose, ExploreSceneProps } from '../types'
 import { frameFlow } from './frameFlow'
 import { frameNodes } from './frameNodes'
 import { manualPoseChanged } from './manualPose'
@@ -35,7 +35,6 @@ export function CameraController({
   reducedMotion,
   enabled,
   onCameraChange,
-  onDepthChange,
   onInteraction,
 }: ExploreSceneProps & { onInteraction: (active: boolean) => void }) {
   const controls = useRef<Controls>(null)
@@ -55,15 +54,15 @@ export function CameraController({
   const panDelta = useMemo(() => new Vector3(), [])
   const tweening = useRef(false)
   const manualStart = useRef<CameraPose | null>(null)
-  const latest = useRef({ enabled, reducedMotion, onCameraChange, onDepthChange, onInteraction })
+  const latest = useRef({ enabled, reducedMotion, onCameraChange, onInteraction })
   const focus = nodes.find((node) => node.id === focusedId)
   const focusX = focus?.position[0]
   const focusY = focus?.position[1]
   const focusZ = focus?.position[2]
 
   useEffect(() => {
-    latest.current = { enabled, reducedMotion, onCameraChange, onDepthChange, onInteraction }
-  }, [enabled, reducedMotion, onCameraChange, onDepthChange, onInteraction])
+    latest.current = { enabled, reducedMotion, onCameraChange, onInteraction }
+  }, [enabled, reducedMotion, onCameraChange, onInteraction])
 
   useEffect(() => {
     // SceneCanvas starts with its shared orthographic camera. Wait for this scene's
@@ -225,10 +224,10 @@ export function CameraController({
     latest.current.onInteraction(false)
     invalidate()
     if (!changed) return
-    const distance = camera.position.distanceTo(orbit.target)
-    const depth: ExploreDepth = distance < 16 ? 2 : distance < 23 ? 1 : 0
     lastPoseKey.current = poseKey(pose)
-    latest.current.onCameraChange(pose, depth)
+    // Orbit, pan and zoom adjust the viewpoint, not the learner's chosen
+    // disclosure level. A distant camera must not collapse visible modules.
+    latest.current.onCameraChange(pose)
   }
 
   return (

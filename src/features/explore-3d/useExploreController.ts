@@ -103,12 +103,13 @@ export function useExploreController(suspended = false) {
     [depth, patch],
   )
 
+  // Disclosure is explicit UI state. Legacy scene callbacks may provide a
+  // second depth hint, but saving a camera pose must never change that state.
   const changeCamera = useCallback(
-    (pose: CameraPose, nextDepth?: ExploreDepth) => {
+    (pose: CameraPose) => {
       patch(
         {
           view: [...pose.position, ...pose.target].map((v) => v.toFixed(2)).join(','),
-          ...(nextDepth === undefined ? {} : { depth: nextDepth ? String(nextDepth) : null }),
         },
         true,
       )

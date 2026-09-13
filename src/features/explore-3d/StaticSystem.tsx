@@ -1,5 +1,6 @@
 import { ArrowRight, Box, Braces, CheckCheck, Layers3, Network, UserRound } from 'lucide-react'
 import { exploreNodes } from './data'
+import { categoryColorStyle } from './categoryColors'
 
 const icons = [UserRound, Layers3, Box, Braces, Network, CheckCheck]
 export function StaticSystem({
@@ -18,7 +19,11 @@ export function StaticSystem({
         {core.map((node, index) => {
           const Icon = icons[index % icons.length]
           return (
-            <button key={node.id} onClick={() => onSelect(node.id)}>
+            <button
+              key={node.id}
+              style={categoryColorStyle(node.category)}
+              onClick={() => onSelect(node.id)}
+            >
               <span>0{index + 1}</span>
               <Icon size={24} />
               <strong>{node.label}</strong>

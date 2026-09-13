@@ -2,6 +2,7 @@ import { act, cleanup, renderHook } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { useImmersiveController } from './useImmersiveController'
 import { getTaskScenario } from './scenarios'
+import type { CameraPose, ExploreSceneProps } from '../types'
 
 const initial = { selectedId: null, depth: 0, mode: 'free', taskStep: 0 } as const
 afterEach(() => {
@@ -10,6 +11,36 @@ afterEach(() => {
 })
 
 describe('simulator controller invariants', () => {
+  it('preserves inherited and manually selected disclosure levels across all camera gestures until Reset', () => {
+    const { result } = renderHook(() => useImmersiveController({ ...initial, depth: 2 }, false))
+    const gestures: CameraPose[] = [
+      { position: [25, 18, 12], target: [1, 2, 0] },
+      { position: [26, 18, 12], target: [2, 2, 0] },
+      { position: [7, 8, 10], target: [0, 1, 0] },
+    ]
+    const savePose: ExploreSceneProps['onCameraChange'] = result.current.changeCamera
+    act(() => savePose(gestures[0], 0))
+    expect(result.current.depth).toBe(2)
+    for (const depth of [0, 1, 2] as const) {
+      act(() => result.current.changeDepth(depth))
+      const visibleNodes = result.current.graph.nodes
+      for (const [index, pose] of gestures.entries()) {
+        // Old renderers passed zoom-derived depth on every gesture. Even that
+        // obsolete hint must not replace an explicitly selected level.
+        act(() => savePose(pose, index === 2 ? 2 : 0))
+        expect(result.current.depth).toBe(depth)
+        expect(result.current.graph.nodes).toBe(visibleNodes)
+        expect(result.current.cameraPose).toEqual(pose)
+      }
+    }
+    act(() => result.current.reset())
+    expect(result.current.depth).toBe(0)
+    expect(result.current.cameraPose).toBeUndefined()
+    expect(result.current.graph.nodes).toHaveLength(6)
+    act(() => savePose(gestures[2], 2))
+    expect(result.current.depth).toBe(0)
+  })
+
   it('keeps graph and scene callbacks stable across drawer and explanation changes', () => {
     const { result } = renderHook(() => useImmersiveController(initial, false))
     expect(result.current.graph.nodes).toHaveLength(6)

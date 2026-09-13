@@ -494,6 +494,27 @@
   border-radius: 12px;
   padding: 16px;
 }
+.im3-subbar > .ex3-color-key {
+  padding: 0 8px;
+  border: 0;
+  background: transparent;
+  gap: 8px 12px;
+}
+.im3-subbar .ex3-color-key-heading {
+  display: none;
+}
+.im3-navigation .ex3-concept.is-selected {
+  background: var(--module-surface);
+  border-color: var(--module-light);
+}
+.im3-module-category {
+  display: inline-block;
+  padding: 5px 8px;
+  border-left: 3px solid var(--module-accent);
+  border-radius: 4px;
+  color: var(--module-dark);
+  background: var(--module-surface);
+}
 .im3-legend > div {
   display: flex;
   justify-content: space-between;

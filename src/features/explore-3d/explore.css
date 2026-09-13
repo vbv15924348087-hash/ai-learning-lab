@@ -198,7 +198,15 @@
 }
 .ex3-category-number {
   font-size: 9px;
-  color: #a4afc0;
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  color: var(--module-dark, #5a6981);
+  background: var(--module-surface, #f1f4fa);
+  border: 1px solid var(--module-light, #dce5f0);
+  border-bottom: 3px solid var(--module-accent, #5180bc);
 }
 .ex3-concept {
   display: flex;
@@ -214,8 +222,9 @@
   gap: 5px;
 }
 .ex3-concept.is-selected {
-  border-color: #cbd6f4;
-  background: #eef2ff;
+  border-color: var(--module-light, #cbd6f4);
+  background: var(--module-surface, #eef2ff);
+  box-shadow: inset 3px 0 var(--module-accent, #5265d8);
 }
 .ex3-concept strong {
   font-size: 10px;
@@ -227,7 +236,54 @@
   display: block;
   font-size: 9px;
   margin-top: 3px;
-  color: #929cae;
+  color: #64748b;
+}
+.ex3-concept.is-selected strong {
+  color: var(--module-dark, #43577a);
+}
+.ex3-color-key {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  gap: 6px 14px;
+  padding: 9px 14px;
+  border-top: 1px solid #e6ebf3;
+  background: #fff;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.ex3-color-key-heading {
+  color: #64748b;
+  font-size: 10px;
+}
+.ex3-color-key-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--module-dark);
+  white-space: nowrap;
+}
+.ex3-color-swatch {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-radius: 3px;
+  background: var(--module-accent);
+}
+.ex3-detail.ex3-detail-colored {
+  border-top: 3px solid var(--module-accent);
+}
+.ex3-detail-colored > .ex3-kicker {
+  color: var(--module-dark);
+}
+.ex3-static .ex3-static-nodes > button {
+  border-top-color: var(--module-accent);
+  background: var(--module-surface);
+}
+.ex3-static-nodes > button > svg:first-of-type {
+  color: var(--module-dark);
 }
 .ex3-learned {
   color: #4b8b72;

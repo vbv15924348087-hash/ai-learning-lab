@@ -27,7 +27,17 @@ vi.mock('./scene/ExploreScene', () => ({
           props.onCameraChange({ position: [7, 8, 10], target: [0, 1, 0] }, 2)
         }}
       >
-        模拟缩放至细节并保存视角
+        模拟缩放并保存视角
+      </button>
+      <button
+        onClick={() => props.onCameraChange({ position: [25, 18, 12], target: [1, 2, 0] }, 0)}
+      >
+        模拟旋转并保存视角
+      </button>
+      <button
+        onClick={() => props.onCameraChange({ position: [26, 18, 12], target: [2, 2, 0] }, 0)}
+      >
+        模拟平移并保存视角
       </button>
       <button
         onClick={() => {
@@ -204,13 +214,42 @@ describe('3D explorer UI and controller', () => {
     expect(screen.getByTestId('location').textContent).not.toMatch(/node=|depth=|mode=|view=/)
   })
 
-  it('keeps the zoom disclosure update together with the URL camera position', async () => {
+  it('preserves every explicit disclosure level through orbit, pan and zoom until Reset', async () => {
     const scene = await openExplore()
-    fireEvent.click(screen.getByRole('button', { name: '模拟缩放至细节并保存视角' }))
+    const levels = within(screen.getByRole('group', { name: '场景展开层级' }))
+    for (const [index, label] of ['全景', '模块', '细节'].entries()) {
+      fireEvent.click(levels.getByRole('button', { name: label }))
+      const nodeCount = scene.dataset.nodeCount
+      for (const [gesture, pose] of [
+        ['旋转', '25.00,18.00,12.00,1.00,2.00,0.00'],
+        ['平移', '26.00,18.00,12.00,2.00,2.00,0.00'],
+        ['缩放', '7.00,8.00,10.00,0.00,1.00,0.00'],
+      ]) {
+        fireEvent.click(screen.getByRole('button', { name: `模拟${gesture}并保存视角` }))
+        expect(levels.getByRole('button', { name: label })).toHaveAttribute('aria-pressed', 'true')
+        expect(scene).toHaveAttribute('data-node-count', nodeCount)
+        const params = new URLSearchParams(
+          screen.getByTestId('location').textContent!.split('?')[1],
+        )
+        expect(params.get('depth')).toBe(index === 0 ? null : String(index))
+        expect(params.get('view')).toBe(pose)
+      }
+    }
+    fireEvent.click(screen.getByRole('button', { name: '回到全景' }))
+    expect(levels.getByRole('button', { name: '全景' })).toHaveAttribute('aria-pressed', 'true')
+    expect(scene).toHaveAttribute('data-node-count', '6')
+    expect(screen.getByTestId('location').textContent).not.toMatch(/depth=|view=/)
+    fireEvent.click(screen.getByRole('button', { name: '模拟缩放并保存视角' }))
+    expect(scene).toHaveAttribute('data-node-count', '6')
+  })
+
+  it('retains a restored URL disclosure level when saving a distant camera pose', async () => {
+    const scene = await openExplore('/explore?depth=2')
+    fireEvent.click(screen.getByRole('button', { name: '模拟旋转并保存视角' }))
     expect(scene).toHaveAttribute('data-node-count', String(exploreNodes.length))
     const params = new URLSearchParams(screen.getByTestId('location').textContent!.split('?')[1])
     expect(params.get('depth')).toBe('2')
-    expect(params.get('view')).toBe('7.00,8.00,10.00,0.00,1.00,0.00')
+    expect(params.get('view')).toBe('25.00,18.00,12.00,1.00,2.00,0.00')
   })
 
   it('retains a clicked concept when the same event also saves the camera pose', async () => {

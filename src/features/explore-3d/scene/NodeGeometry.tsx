@@ -1,15 +1,19 @@
-import { memo } from 'react'
-import type { NodeKind } from '../types'
+import { createContext, memo, useContext } from 'react'
+import type { ExploreCategory, NodeKind } from '../types'
+import { categoryColors, type CategoryPalette } from '../categoryColors'
 import { DoubleSide, FrontSide } from 'three'
 
-type SurfaceProps = { color?: string; opacity?: number; glass?: boolean }
+type MaterialTone = keyof CategoryPalette
+type SurfaceProps = { tone?: MaterialTone; opacity?: number; glass?: boolean }
+const PaletteContext = createContext<CategoryPalette>(categoryColors.model)
 
-function Surface({ color = '#edf3fa', opacity = 1, glass = false }: SurfaceProps) {
+function Surface({ tone = 'body', opacity = 1, glass = false }: SurfaceProps) {
+  const palette = useContext(PaletteContext)
   return (
     <meshStandardMaterial
-      color={color}
-      roughness={glass ? 0.25 : 0.46}
-      metalness={glass ? 0.07 : 0.12}
+      color={palette[tone]}
+      roughness={glass ? 0.3 : 0.55}
+      metalness={glass ? 0.03 : 0.05}
       transparent={opacity < 1}
       opacity={opacity}
       depthWrite={!glass && opacity > 0.7}
@@ -21,18 +25,18 @@ function Surface({ color = '#edf3fa', opacity = 1, glass = false }: SurfaceProps
 function Plate({
   position = [0, 0, 0],
   size,
-  color,
+  tone,
   opacity = 1,
 }: {
   position?: [number, number, number]
   size: [number, number, number]
-  color?: string
+  tone?: MaterialTone
   opacity?: number
 }) {
   return (
     <mesh position={position}>
       <boxGeometry args={size} />
-      <Surface color={color} opacity={opacity} />
+      <Surface tone={tone} opacity={opacity} />
     </mesh>
   )
 }
@@ -40,16 +44,16 @@ function Plate({
 function ModelGeometry({ opacity }: { opacity: number }) {
   return (
     <group>
-      <Plate position={[0, -0.6, 0]} size={[2.65, 0.2, 2.3]} color="#d5e3f7" opacity={opacity} />
+      <Plate position={[0, -0.6, 0]} size={[2.65, 0.2, 2.3]} tone="light" opacity={opacity} />
       {[-0.3, 0.12, 0.54, 0.96, 1.38].map((y, index) => (
         <mesh key={y} position={[0, y, 0]}>
           <boxGeometry args={[2.35 - index * 0.09, 0.055, 1.96 - index * 0.08]} />
-          <Surface color="#9cbdea" opacity={opacity * 0.34} glass />
+          <Surface tone="light" opacity={opacity * 0.34} glass />
         </mesh>
       ))}
       <mesh position={[0, 0.58, 0]} rotation={[0.2, Math.PI / 4, 0.1]}>
         <octahedronGeometry args={[0.73, 0]} />
-        <Surface color="#3c77ce" opacity={opacity} />
+        <Surface tone="accent" opacity={opacity} />
       </mesh>
       {[-1, 1].map((x) =>
         [-0.82, 0.82].map((z) => (
@@ -57,7 +61,7 @@ function ModelGeometry({ opacity }: { opacity: number }) {
             key={`${x}-${z}`}
             position={[x, 0.46, z]}
             size={[0.045, 1.93, 0.045]}
-            color="#93afcf"
+            tone="body"
             opacity={opacity * 0.7}
           />
         )),
@@ -69,7 +73,7 @@ function ModelGeometry({ opacity }: { opacity: number }) {
 function ContextGeometry({ opacity }: { opacity: number }) {
   return (
     <group>
-      <Plate position={[0, -0.55, 0]} size={[2.4, 0.2, 1.8]} color="#d5e2f3" opacity={opacity} />
+      <Plate position={[0, -0.55, 0]} size={[2.4, 0.2, 1.8]} tone="light" opacity={opacity} />
       {[
         [-1.15, 0.35, 0, 0.055, 1.7, 1.8],
         [1.15, 0.35, 0, 0.055, 1.7, 1.8],
@@ -77,20 +81,20 @@ function ContextGeometry({ opacity }: { opacity: number }) {
       ].map(([x, y, z, w, h, d], index) => (
         <mesh key={index} position={[x, y, z]}>
           <boxGeometry args={[w, h, d]} />
-          <Surface color="#88add9" opacity={opacity * 0.22} glass />
+          <Surface tone="light" opacity={opacity * 0.22} glass />
         </mesh>
       ))}
       {[-0.65, -0.22, 0.22, 0.65].map((x, index) => (
         <group key={x} position={[x, 0.14 + index * 0.12, 0]} rotation={[0, 0, -0.12]}>
           <Plate
             size={[0.3, 0.96, 0.85]}
-            color={index === 2 ? '#7ba8e1' : '#eaf0f8'}
+            tone={index === 2 ? 'accent' : 'body'}
             opacity={opacity}
           />
           <Plate
             position={[0, 0.15, 0.435]}
             size={[0.2, 0.065, 0.02]}
-            color="#5587c9"
+            tone="dark"
             opacity={opacity}
           />
         </group>
@@ -104,27 +108,27 @@ function HarnessGeometry({ opacity }: { opacity: number }) {
     <group>
       <mesh position={[0, -0.48, 0]}>
         <cylinderGeometry args={[1.48, 1.6, 0.36, 48]} />
-        <Surface color="#e1e8f0" opacity={opacity} />
+        <Surface tone="light" opacity={opacity} />
       </mesh>
       <mesh position={[0, -0.28, 0]} rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[1.21, 0.055, 8, 48]} />
-        <Surface color="#5286cc" opacity={opacity} />
+        <Surface tone="accent" opacity={opacity} />
       </mesh>
-      <Plate position={[0, -0.05, 0]} size={[1.05, 0.34, 0.95]} color="#7c9fc9" opacity={opacity} />
+      <Plate position={[0, -0.05, 0]} size={[1.05, 0.34, 0.95]} tone="body" opacity={opacity} />
       {[-1, 1].map((x) =>
         [-1, 1].map((z) => (
           <Plate
             key={`${x}-${z}`}
             position={[x * 0.77, 0.05, z * 0.7]}
             size={[0.23, 0.6, 0.23]}
-            color="#c4d5e8"
+            tone="body"
             opacity={opacity}
           />
         )),
       )}
       <mesh position={[0, 0.33, 0]}>
         <octahedronGeometry args={[0.27]} />
-        <Surface color="#3468ad" opacity={opacity} />
+        <Surface tone="dark" opacity={opacity} />
       </mesh>
     </group>
   )
@@ -133,19 +137,19 @@ function HarnessGeometry({ opacity }: { opacity: number }) {
 function MemoryGeometry({ opacity }: { opacity: number }) {
   return (
     <group>
-      <Plate position={[0, -0.46, 0]} size={[1.5, 0.14, 1.1]} color="#b9cce1" opacity={opacity} />
+      <Plate position={[0, -0.46, 0]} size={[1.5, 0.14, 1.1]} tone="light" opacity={opacity} />
       {[-0.45, 0, 0.45].map((x, index) => (
         <group key={x}>
           <Plate
             position={[x, 0.04, 0]}
             size={[0.28, 0.95 + index * 0.09, 0.85]}
-            color={index === 1 ? '#779ece' : '#d9e3ef'}
+            tone={index === 1 ? 'accent' : 'body'}
             opacity={opacity}
           />
           <Plate
             position={[x, 0.23, 0.435]}
             size={[0.16, 0.065, 0.025]}
-            color="#f4f8fe"
+            tone="surface"
             opacity={opacity}
           />
         </group>
@@ -162,20 +166,20 @@ function RagGeometry({ opacity }: { opacity: number }) {
           key={x}
           position={[x, 0.35, -0.2 + (index % 2) * 0.12]}
           size={[0.2, 0.58, 0.5]}
-          color="#bdd1e9"
+          tone="body"
           opacity={opacity}
         />
       ))}
       <mesh position={[0, -0.05, 0]} rotation={[Math.PI, 0, 0]}>
         <coneGeometry args={[0.73, 0.55, 4, 1, true]} />
-        <Surface color="#789cc9" opacity={opacity * 0.44} glass />
+        <Surface tone="light" opacity={opacity * 0.44} glass />
       </mesh>
       {[-0.18, 0.18].map((x) => (
         <Plate
           key={x}
           position={[x, -0.51, 0]}
           size={[0.18, 0.28, 0.45]}
-          color="#407ac8"
+          tone="accent"
           opacity={opacity}
         />
       ))}
@@ -191,15 +195,15 @@ function GateGeometry({ opacity }: { opacity: number }) {
           key={x}
           position={[x, 0.05, 0]}
           size={[0.2, 1.5, 0.36]}
-          color="#b8cce3"
+          tone="body"
           opacity={opacity}
         />
       ))}
-      <Plate position={[0, 0.74, 0]} size={[1.5, 0.2, 0.36]} color="#799bc6" opacity={opacity} />
-      <Plate position={[0, 0.04, 0]} size={[1.07, 0.085, 0.11]} color="#3973c0" opacity={opacity} />
+      <Plate position={[0, 0.74, 0]} size={[1.5, 0.2, 0.36]} tone="body" opacity={opacity} />
+      <Plate position={[0, 0.04, 0]} size={[1.07, 0.085, 0.11]} tone="dark" opacity={opacity} />
       <mesh position={[0, 0.35, 0]} rotation={[0, 0, Math.PI / 4]}>
         <boxGeometry args={[0.24, 0.24, 0.14]} />
-        <Surface color="#598ccc" opacity={opacity} />
+        <Surface tone="accent" opacity={opacity} />
       </mesh>
     </group>
   )
@@ -209,30 +213,25 @@ function CheckGeometry({ opacity, immersive = false }: { opacity: number; immers
   if (immersive)
     return (
       <group>
-        <Plate
-          position={[0, -0.67, 0]}
-          size={[1.6, 0.18, 1.24]}
-          color="#c3d5e5"
-          opacity={opacity}
-        />
+        <Plate position={[0, -0.67, 0]} size={[1.6, 0.18, 1.24]} tone="light" opacity={opacity} />
         {[-0.72, 0.72].map((x) => (
           <Plate
             key={x}
             position={[x, 0.05, 0]}
             size={[0.16, 1.4, 0.5]}
-            color="#548b87"
+            tone="body"
             opacity={opacity}
           />
         ))}
-        <Plate position={[0, 0.78, 0]} size={[1.6, 0.18, 0.5]} color="#548b87" opacity={opacity} />
+        <Plate position={[0, 0.78, 0]} size={[1.6, 0.18, 0.5]} tone="body" opacity={opacity} />
         <mesh position={[0, 0.08, 0]}>
           <boxGeometry args={[1.2, 0.85, 0.045]} />
-          <Surface color="#6eb9a3" opacity={opacity * 0.24} glass />
+          <Surface tone="light" opacity={opacity * 0.24} glass />
         </mesh>
         <Plate
           position={[0, 0.16, 0.04]}
           size={[1.18, 0.035, 0.055]}
-          color="#258873"
+          tone="accent"
           opacity={opacity}
         />
         <DocumentGeometry opacity={opacity} />
@@ -242,23 +241,23 @@ function CheckGeometry({ opacity, immersive = false }: { opacity: number; immers
     <group>
       <mesh>
         <torusGeometry args={[0.72, 0.12, 10, 40]} />
-        <Surface color="#a2bbd9" opacity={opacity} />
+        <Surface tone="body" opacity={opacity} />
       </mesh>
       <group rotation={[0, 0, -Math.PI / 4]} position={[0.05, 0.05, 0.05]}>
         <Plate
           position={[-0.17, -0.09, 0]}
           size={[0.18, 0.45, 0.18]}
-          color="#3975bd"
+          tone="accent"
           opacity={opacity}
         />
         <Plate
           position={[0.09, -0.23, 0]}
           size={[0.69, 0.18, 0.18]}
-          color="#3975bd"
+          tone="accent"
           opacity={opacity}
         />
       </group>
-      <Plate position={[0, -0.87, 0]} size={[1.2, 0.13, 0.8]} opacity={opacity} />
+      <Plate position={[0, -0.87, 0]} size={[1.2, 0.13, 0.8]} tone="light" opacity={opacity} />
     </group>
   )
 }
@@ -268,21 +267,21 @@ function ExternalGeometry({ opacity }: { opacity: number }) {
     <group>
       <mesh>
         <sphereGeometry args={[0.84, 20, 12]} />
-        <Surface color="#d4e3f3" opacity={opacity * 0.34} glass />
+        <Surface tone="light" opacity={opacity * 0.34} glass />
       </mesh>
       {[0, Math.PI / 2].map((rotation) => (
         <mesh key={rotation} rotation={[0, rotation, 0]}>
           <torusGeometry args={[0.87, 0.035, 6, 40]} />
-          <Surface color="#7296c1" opacity={opacity} />
+          <Surface tone="accent" opacity={opacity} />
         </mesh>
       ))}
       <mesh rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[0.87, 0.035, 6, 40]} />
-        <Surface color="#7296c1" opacity={opacity} />
+        <Surface tone="accent" opacity={opacity} />
       </mesh>
       <mesh position={[0, -1.02, 0]}>
         <cylinderGeometry args={[1.3, 1.38, 0.14, 40]} />
-        <Surface color="#e0e8f0" opacity={opacity} />
+        <Surface tone="light" opacity={opacity} />
       </mesh>
     </group>
   )
@@ -291,20 +290,20 @@ function ExternalGeometry({ opacity }: { opacity: number }) {
 function DocumentGeometry({ opacity, input = false }: { opacity: number; input?: boolean }) {
   return (
     <group rotation={[-0.12, 0, -0.08]}>
-      <Plate size={[1.12, 1.48, 0.16]} color={input ? '#d1e1f4' : '#f5f8fc'} opacity={opacity} />
+      <Plate size={[1.12, 1.48, 0.16]} tone={input ? 'body' : 'light'} opacity={opacity} />
       {[0.37, 0.1, -0.17].map((y, index) => (
         <Plate
           key={y}
           position={[-0.04, y, 0.095]}
           size={[index === 2 ? 0.43 : 0.72, 0.09, 0.035]}
-          color={input ? '#5b86bc' : '#86a5cc'}
+          tone="dark"
           opacity={opacity}
         />
       ))}
       {!input && (
         <mesh position={[0.37, -0.62, 0.15]}>
           <sphereGeometry args={[0.2, 12, 8]} />
-          <Surface color="#517eae" opacity={opacity} />
+          <Surface tone="accent" opacity={opacity} />
         </mesh>
       )}
     </group>
@@ -319,13 +318,13 @@ function InternalModelGeometry({ part, opacity }: { part: string; opacity: numbe
           <group key={x} position={[x, index === 1 ? 0.13 : 0, 0]}>
             <Plate
               size={[0.43, 0.68, 0.16]}
-              color={index === 1 ? '#75a0d8' : '#c9dbee'}
+              tone={index === 1 ? 'accent' : 'body'}
               opacity={opacity}
             />
             <Plate
               position={[0, 0.08, 0.1]}
               size={[0.23, 0.045, 0.03]}
-              color="#f2f7fd"
+              tone="surface"
               opacity={opacity}
             />
           </group>
@@ -341,7 +340,7 @@ function InternalModelGeometry({ part, opacity }: { part: string; opacity: numbe
               key={`${x}-${y}`}
               position={[x, y, 0]}
               size={[0.27, 0.22, 0.12 + ((column + row) % 3) * 0.15]}
-              color={(column + row) % 2 ? '#b6cce8' : '#6493ce'}
+              tone={(column + row) % 2 ? 'body' : 'accent'}
               opacity={opacity}
             />
           )),
@@ -356,7 +355,7 @@ function InternalModelGeometry({ part, opacity }: { part: string; opacity: numbe
             key={y}
             position={[0, y, 0]}
             size={[1.2, 0.14, 0.92]}
-            color={index === 2 ? '#729dd6' : '#bfd2ea'}
+            tone={index === 2 ? 'accent' : 'body'}
             opacity={opacity}
           />
         ))}
@@ -365,7 +364,7 @@ function InternalModelGeometry({ part, opacity }: { part: string; opacity: numbe
             key={x}
             position={[x, 0.04, 0]}
             size={[0.04, 1.2, 0.045]}
-            color="#477ab9"
+            tone="dark"
             opacity={opacity}
           />
         ))}
@@ -376,19 +375,19 @@ function InternalModelGeometry({ part, opacity }: { part: string; opacity: numbe
       <group>
         <mesh>
           <sphereGeometry args={[0.2, 12, 8]} />
-          <Surface color="#447ecb" opacity={opacity} />
+          <Surface tone="accent" opacity={opacity} />
         </mesh>
         {[0, 1, 2, 3, 4].map((index) => (
           <group key={index} rotation={[0, 0, index * Math.PI * 0.4]}>
             <Plate
               position={[0, 0.29, 0]}
               size={[index === 1 ? 0.09 : 0.035, 0.46, 0.035]}
-              color={index === 1 ? '#447ecb' : '#c0d2e8'}
+              tone={index === 1 ? 'accent' : 'light'}
               opacity={opacity}
             />
             <mesh position={[0, 0.65, 0]}>
               <sphereGeometry args={[index === 1 ? 0.18 : 0.12, 12, 8]} />
-              <Surface color={index === 1 ? '#447ecb' : '#a5c0e2'} opacity={opacity} />
+              <Surface tone={index === 1 ? 'accent' : 'body'} opacity={opacity} />
             </mesh>
           </group>
         ))}
@@ -401,13 +400,13 @@ function InternalModelGeometry({ part, opacity }: { part: string; opacity: numbe
           key={y}
           position={[0, y, index === 2 ? 0.12 : 0]}
           size={[index === 2 ? 1.1 : 0.8 - index * 0.17, 0.22, 0.22]}
-          color={index === 2 ? '#5087cf' : '#c5d5e9'}
+          tone={index === 2 ? 'accent' : 'body'}
           opacity={opacity}
         />
       ))}
       <mesh position={[0.73, 0.38, 0.12]} rotation={[0, 0, -Math.PI / 2]}>
         <coneGeometry args={[0.13, 0.28, 4]} />
-        <Surface color="#5087cf" opacity={opacity} />
+        <Surface tone="accent" opacity={opacity} />
       </mesh>
     </group>
   )
@@ -418,33 +417,23 @@ function ConnectorGeometry({ opacity }: { opacity: number }) {
     <group>
       <mesh rotation={[Math.PI / 2, 0, 0]}>
         <cylinderGeometry args={[0.49, 0.49, 0.28, 6]} />
-        <Surface color="#7a80b2" opacity={opacity} />
+        <Surface tone="accent" opacity={opacity} />
       </mesh>
       {[0, 1, 2, 3].map((index) => (
         <group key={index} rotation={[0, 0, (index * Math.PI) / 2]}>
-          <Plate
-            position={[0, 0.59, 0]}
-            size={[0.12, 0.4, 0.13]}
-            color="#afaaca"
-            opacity={opacity}
-          />
-          <Plate
-            position={[0, 0.86, 0]}
-            size={[0.4, 0.23, 0.28]}
-            color="#8a88b3"
-            opacity={opacity}
-          />
+          <Plate position={[0, 0.59, 0]} size={[0.12, 0.4, 0.13]} tone="body" opacity={opacity} />
+          <Plate position={[0, 0.86, 0]} size={[0.4, 0.23, 0.28]} tone="accent" opacity={opacity} />
           <Plate
             position={[0, 0.87, 0.15]}
             size={[0.21, 0.08, 0.02]}
-            color="#ecedf7"
+            tone="surface"
             opacity={opacity}
           />
         </group>
       ))}
       <mesh position={[0, 0, 0.18]}>
         <sphereGeometry args={[0.16, 12, 8]} />
-        <Surface color="#dce0f2" opacity={opacity} />
+        <Surface tone="light" opacity={opacity} />
       </mesh>
     </group>
   )
@@ -457,12 +446,12 @@ function ArchiveGeometry({ opacity }: { opacity: number }) {
         <group key={y}>
           <mesh position={[0, y, 0]}>
             <cylinderGeometry args={[0.74, 0.74, 0.29, 24]} />
-            <Surface color={index === 1 ? '#6b9aa3' : '#b9d0d7'} opacity={opacity} />
+            <Surface tone={index === 1 ? 'accent' : 'body'} opacity={opacity} />
           </mesh>
           <Plate
             position={[0, y, 0.735]}
             size={[0.35, 0.055, 0.025]}
-            color="#f1fafb"
+            tone="surface"
             opacity={opacity}
           />
         </group>
@@ -472,18 +461,18 @@ function ArchiveGeometry({ opacity }: { opacity: number }) {
 }
 
 function AgentLoopGeometry({ opacity }: { opacity: number }) {
-  const colors = ['#789fc8', '#557baf', '#b39064', '#568d81']
+  const tones = ['body', 'accent', 'body', 'dark'] as const
   return (
     <group rotation={[Math.PI / 2.8, 0, 0]}>
-      {colors.map((color, index) => (
-        <group key={color} rotation={[0, 0, (index * Math.PI) / 2]}>
+      {tones.map((tone, index) => (
+        <group key={index} rotation={[0, 0, (index * Math.PI) / 2]}>
           <mesh>
             <torusGeometry args={[0.9, 0.16, 8, 14, Math.PI * 0.42]} />
-            <Surface color={color} opacity={opacity} />
+            <Surface tone={tone} opacity={opacity} />
           </mesh>
           <mesh position={[0.24, 0.86, 0]} rotation={[0, 0, Math.PI * 0.42]}>
             <coneGeometry args={[0.23, 0.32, 4]} />
-            <Surface color={color} opacity={opacity} />
+            <Surface tone={tone} opacity={opacity} />
           </mesh>
         </group>
       ))}
@@ -491,7 +480,7 @@ function AgentLoopGeometry({ opacity }: { opacity: number }) {
   )
 }
 
-export const NodeGeometry = memo(function NodeGeometry({
+function NodeShape({
   kind,
   opacity,
   nodeId,
@@ -534,14 +523,14 @@ export const NodeGeometry = memo(function NodeGeometry({
         <group rotation={[Math.PI / 2, 0, 0]}>
           <mesh>
             <torusGeometry args={[0.7, 0.13, 10, 36, Math.PI * 1.7]} />
-            <Surface color="#5b87c1" opacity={opacity} />
+            <Surface tone="body" opacity={opacity} />
           </mesh>
           <mesh
             position={[Math.cos(Math.PI * 1.7) * 0.7, Math.sin(Math.PI * 1.7) * 0.7, 0]}
             rotation={[0, 0, Math.PI * 1.7]}
           >
             <coneGeometry args={[0.24, 0.42, 4]} />
-            <Surface color="#4276b8" opacity={opacity} />
+            <Surface tone="accent" opacity={opacity} />
           </mesh>
         </group>
       )
@@ -550,21 +539,16 @@ export const NodeGeometry = memo(function NodeGeometry({
         <group>
           <mesh position={[0, -0.48, 0]}>
             <cylinderGeometry args={[0.7, 0.76, 0.17, 6]} />
-            <Surface color="#cad8e8" opacity={opacity} />
+            <Surface tone="light" opacity={opacity} />
           </mesh>
-          <Plate size={[0.9, 0.67, 0.19]} color="#7697bf" opacity={opacity} />
+          <Plate size={[0.9, 0.67, 0.19]} tone="accent" opacity={opacity} />
           <Plate
             position={[0, 0.04, 0.11]}
             size={[0.65, 0.39, 0.025]}
-            color="#edf4fc"
+            tone="surface"
             opacity={opacity}
           />
-          <Plate
-            position={[0, -0.37, 0]}
-            size={[0.13, 0.3, 0.18]}
-            color="#9bb4d1"
-            opacity={opacity}
-          />
+          <Plate position={[0, -0.37, 0]} size={[0.13, 0.3, 0.18]} tone="body" opacity={opacity} />
         </group>
       )
     default:
@@ -572,13 +556,30 @@ export const NodeGeometry = memo(function NodeGeometry({
         <group>
           <mesh rotation={[0, Math.PI / 4, 0]}>
             <octahedronGeometry args={[0.48, 0]} />
-            <Surface color="#abc1df" opacity={opacity} />
+            <Surface tone="body" opacity={opacity} />
           </mesh>
           <mesh position={[0, -0.58, 0]}>
             <cylinderGeometry args={[0.6, 0.65, 0.1, 24]} />
-            <Surface color="#dae4ef" opacity={opacity} />
+            <Surface tone="light" opacity={opacity} />
           </mesh>
         </group>
       )
   }
+}
+
+export const NodeGeometry = memo(function NodeGeometry({
+  category,
+  ...shape
+}: {
+  category: ExploreCategory
+  kind: NodeKind
+  opacity: number
+  nodeId?: string
+  immersive?: boolean
+}) {
+  return (
+    <PaletteContext.Provider value={categoryColors[category]}>
+      <NodeShape {...shape} />
+    </PaletteContext.Provider>
+  )
 })
